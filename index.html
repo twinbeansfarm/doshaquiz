@@ -396,53 +396,9 @@
 
         <div id="form-view" style="display: none;">
             <div class="form-block">
-                <h2 class="form-title">Student Clinic Health Information & History Intake</h2>
+                <h2 class="form-title">Health Information & History Intake</h2>
                 <p style="font-size: 0.9em; line-height: 1.6; color: #555; margin-bottom: 20px;" class="print-hide">
-                    Please call or arrive on time for your appointment. Due to scheduling restrictions we cannot delay your appointment for missing application forms. We apologize for any delays in the clinical schedule (generally less than fifteen minutes).
                 </p>
-                
-                <div class="form-grid" style="display: block;">
-                    <div class="form-group full-width" style="margin-bottom: 10px;">
-                        <label class="form-label" style="display:inline-block;">My student consultant's name is: </label>
-                        <input type="text" class="glass-input" style="width:250px; display:inline-block; margin-left: 10px;">
-                    </div>
-                    <div class="form-group full-width">
-                        <p style="font-size: 0.9em; line-height: 1.6; color: #555;">
-                            I am aware that my student consultant is enrolled in a 500-hour Ayurveda studies program and has not graduated from this program (expected to graduate by <input type="text" style="width: 100px; border:none; border-bottom: 1px solid #333; background:transparent; outline:none; font-family:'Outfit';">).
-                        </p>
-                        <p style="font-size: 0.9em; line-height: 1.6; color: #555;">
-                            My student consultant will provide a 90-120 minute educational Ayurvedic consultation in order to:
-                            <ul style="margin-top: 5px; font-size: 0.9em; color:#555;">
-                                <li>Determine my mind-body constitution</li>
-                                <li>Identify and assess any imbalances that may exist</li>
-                                <li>Provide information and guidance relevant to helping me nourish, stimulate or balance vital energy</li>
-                                <li>Develop a plan with me for lifestyle changes that may improve my general health and wellness</li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-block">
-                <h2 class="form-title">Agreements & Consent</h2>
-                <div class="form-group full-width">
-                    <label class="checkbox-label"><input type="checkbox"> I agree to study the information provided, participate in the development of my health plan, and implement it according to my ability.</label>
-                    <label class="checkbox-label"><input type="checkbox"> I agree to notify my primary care provider of my intention to begin a new health & wellness plan.</label>
-                    <label class="checkbox-label"><input type="checkbox"> I agree to discontinue the plan if discomfort occurs and notify my consultant and physician.</label>
-                    <label class="checkbox-label"><input type="checkbox"> I agree that in the case of disputes, I will submit such claim to the American Arbitration Association.</label>
-                    <label class="checkbox-label"><input type="checkbox"> I agree that Twin Beans Farm is not responsible for any information provided by the student, which may contain errors, and that any injury is entirely my responsibility.</label>
-                    <label class="checkbox-label"><input type="checkbox"> I acknowledge my health information may be shared with Twin Beans Farm staff and students for educational purposes (excluding personally identifiable info).</label>
-                </div>
-                <div class="form-grid" style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr;">
-                    <div class="form-group print-half">
-                        <label class="form-label">Client Signature (Type Name)</label>
-                        <input type="text" class="glass-input">
-                    </div>
-                    <div class="form-group print-half">
-                        <label class="form-label">Date</label>
-                        <input type="date" class="glass-input">
-                    </div>
-                </div>
             </div>
 
             <div class="form-block">
@@ -539,15 +495,7 @@
                     </ul>
                 </p>
             </div>
-
-            <div class="form-block" style="background: rgba(255,255,255,0.4); border:none;">
-                <h3 style="font-size: 1.1em; color: #333; margin-bottom: 10px;">Student Consultant Client Relationship</h3>
-                <p style="font-size: 0.85em; line-height: 1.6; color: #666;">
-                    If your student consultant sees you in public, he/she usually won't acknowledge you until you acknowledge him/her first. This is to maintain your confidentiality. To keep your relationship professional, please refrain from asking personal questions about your student consultant.<br><br>
-                    Twin Beans Farm is an educational institution specializing in Ayurveda, nutrition, and digestive health. Consultations are limited to nutrition and digestive-health support and do not replace medical diagnosis, treatment, or care provided by a licensed physician. It is not an agreement for ongoing care.
-                </p>
-            </div>
-
+            
             <button class="primary-btn print-hide" onclick="window.print()">Print Intake Form</button>
         </div>
 
@@ -579,12 +527,12 @@
             en: {
                 title: "Prakruti and Vikruti Quiz",
                 formTitle: "Intake Form",
-                instructions: "<strong>Instructions:</strong> Choose the column that matches you historically (Long Term), and the column for current imbalances (Present). You do not need to select an option for every question if unsure.",
+                instructions: "<strong>Instructions:</strong> Choose the column that matches you historically (Long Term), and the column for current imbalances (Present imbalances: Check only the characteristics that you are currently experiencing or feel are out of balance; you do not need to select an option for every question). You may leave this section blank if you are unsure.",
                 namePlaceholder: "Enter your name (optional)",
                 submit: "Reveal My Dosha",
                 vata: "Vata", pitta: "Pitta", kapha: "Kapha",
                 longTerm: "Long Term (Prakruti):", present: "Present (Vikruti):",
-                resultsLongTerm: "Prakruti (Long Term)", resultsPresent: "Vikruti (Current)",
+                resultsLongTerm: "Prakruti (Long Term)", resultsPresent: "Vikruti (Current Imbalance)",
                 rank: "Rank", primary: "Primary", secondary: "Secondary", tertiary: "Tertiary",
                 dashboardTitle: "Final Dosha Designation", constPrakruti: "Constitution",
                 copyProfile: "Copy Link", shareProfile: "Share Profile", resetQuiz: "Clear & Restart", takeQuiz: "Take the Quiz", printProfile: "Print Profile",
@@ -598,7 +546,7 @@
             vi: {
                 title: "Bảng Câu Hỏi Thể Tạng",
                 formTitle: "Hồ Sơ Y Tế",
-                instructions: "<strong>Hướng dẫn:</strong> Chọn khuynh hướng phù hợp với bạn từ trước đến nay (Lâu dài), và chọn cho hiện tại nếu mất cân bằng. Có thể bỏ trống nếu không chắc chắn.",
+                instructions: "<strong>Hướng dẫn:</strong> Chọn khuynh hướng phù hợp với bạn từ trước đến nay (Lâu dài). Mất cân bằng hiện tại: Chỉ đánh dấu những đặc điểm bạn đang gặp hoặc cảm thấy mất cân bằng ở thời điểm hiện tại; không cần đánh dấu cho từng câu (Có thể để trống nếu bạn không biết).",
                 namePlaceholder: "Nhập tên của bạn (tùy chọn)",
                 submit: "Xem Kết Quả",
                 vata: "Vata", pitta: "Pitta", kapha: "Kapha",
