@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   const data = JSON.parse(event.body);
   const shortId = Math.random().toString(36).substring(2, 8);
 
-  await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'apikey': key,
@@ -14,6 +14,10 @@ exports.handler = async (event) => {
     },
     body: JSON.stringify({ id: shortId, data: data })
   });
+
+  if (!response.ok) {
+    return { statusCode: 502, body: JSON.stringify({ error: 'Unable to save quiz profile' }) };
+  }
 
   return { statusCode: 200, body: JSON.stringify({ id: shortId }) };
 };

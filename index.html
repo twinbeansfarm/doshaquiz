@@ -14,7 +14,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="https://twinbeansfarm.com/" aria-label="Twin Beans Farm home"><span class="brand-mark" aria-hidden="true">TB</span><span>Twin Beans Farm</span></a>
+    <a class="brand" href="https://twinbeansfarm.com/" aria-label="Twin Beans Farm home">Twin Beans Farm</a>
     <span class="header-title" id="header-title">Ayurvedic Dosha Quiz</span>
     <div class="lang-switch" role="group" aria-label="Language">
       <button id="btn-vi" type="button" onclick="setLang('vi')">VN</button><button id="btn-en" type="button" onclick="setLang('en')">EN</button>
@@ -33,6 +33,7 @@
         <p id="intro-copy" class="intro-copy"></p>
         <div class="concepts"><div><h2>Prakruti</h2><p id="prakruti-copy"></p></div><div><h2>Vikruti</h2><p id="vikruti-copy"></p></div></div>
         <p id="quiz-meta" class="quiz-meta"></p>
+        <label class="name-field"><span id="name-label"></span><input id="user-name" class="glass-input" type="text" autocomplete="name" maxlength="100"></label>
         <button id="start-btn" class="primary-btn" onclick="startQuiz()"></button>
       </section>
       <section id="questionnaire" hidden>
@@ -41,7 +42,7 @@
           <div class="progress-meta"><span id="section-meta"></span><span id="answer-meta"></span></div>
           <div class="progress-track" role="progressbar" aria-label="Long-term tendency progress" aria-valuemin="0" aria-valuemax="31"><span id="progress-bar"></span></div>
         </div>
-        <div class="question-guide"><span><i class="radio-demo"></i><b id="long-label"></b></span><span><i class="check-demo">✓</i><b id="current-label"></b> <small id="optional-label"></small></span></div>
+        <div class="question-guide"><div><i class="radio-demo"></i><span><b id="long-label"></b><small id="long-help"></small></span></div><div><i class="check-demo"></i><span><b id="current-label"></b><small id="current-help"></small></span></div></div>
         <div id="quiz-content"></div>
         <div id="validation" class="notice validation" role="alert" hidden></div>
         <div class="section-actions"><button class="secondary-btn" id="previous-btn" onclick="previousSection()"></button><button class="primary-btn" id="continue-btn" onclick="continueSection()"></button></div>
