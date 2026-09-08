@@ -6,9 +6,6 @@
   <meta name="theme-color" content="#f5f0e6">
   <title>Ayurvedic Dosha Quiz | Twin Beans Farm</title>
   <meta name="description" content="Discover your Ayurvedic constitution with Twin Beans Farm’s bilingual Prakruti and Vikruti quiz.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,7 +14,7 @@
     <a class="brand" href="https://twinbeansfarm.com/" aria-label="Twin Beans Farm home">Twin Beans Farm</a>
     <span class="header-title" id="header-title">Ayurvedic Dosha Quiz</span>
     <div class="lang-switch" role="group" aria-label="Language">
-      <button id="btn-vi" type="button" onclick="setLang('vi')">VN</button><button id="btn-en" type="button" onclick="setLang('en')">EN</button>
+      <button id="btn-vi" type="button" onclick="setLang('vi')" aria-label="Tiếng Việt">VN</button><button id="btn-en" type="button" onclick="setLang('en')" aria-label="English">EN</button>
     </div>
   </header>
   <main id="main">
@@ -151,10 +148,11 @@
                 </p>
             </div>
             
-            <button class="primary-btn print-hide" onclick="window.print()">Print Intake Form</button>
+            <div class="intake-print-actions print-hide"><button id="print-intake-btn" class="primary-btn" onclick="printIntake()">Print Intake Form</button></div>
         </div>
 
           </main>
-  <footer><a href="https://twinbeansfarm.com/">Twin Beans Farm</a><span>Rooted in nature, made with care.</span><span>© 2026 Twin Beans Farm</span></footer>
+  <footer><a class="footer-brand" href="https://twinbeansfarm.com/">Twin Beans Farm</a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
+  <section id="print-profile" aria-hidden="true"></section>
   <script src="quiz-data.js"></script><script src="app.js"></script>
 </body></html>

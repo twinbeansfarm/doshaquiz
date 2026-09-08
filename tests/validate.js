@@ -21,9 +21,10 @@ for (const question of questions) {
   }
 }
 
-const appSource = fs.readFileSync("app.js", "utf8").replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel};";
+const appSource = fs.readFileSync("app.js", "utf8").replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,setSelections:value=>{selections=value}};";
 const appContext = {
   console,
+  questions,
   localStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {} },
   document: { createElement: () => ({ textContent: "", get innerHTML() { return this.textContent; } }) }
 };
@@ -34,4 +35,16 @@ assert.deepEqual(JSON.parse(JSON.stringify(rankedGroups({ vata: 10, pitta: 10, k
 const empty = resultPanel("vikruti", "Vikruti", { vata: 0, pitta: 0, kapha: 0 });
 assert.match(empty, /Chưa ghi nhận mất cân bằng hiện tại/);
 assert.doesNotMatch(empty, /<table/);
-console.log("Validated 31 questions (15/9/7), workbook section boundaries, bilingual fields, tie groups, and empty Vikruti output.");
+appContext.testApi.setSelections({ name: "", prakruti: { menses: "not_applicable" }, vikruti: {} });
+assert.deepEqual(JSON.parse(JSON.stringify(appContext.testApi.getCurrentCounts())), { prakruti: { vata: 0, pitta: 0, kapha: 0 }, vikruti: { vata: 0, pitta: 0, kapha: 0 } });
+const mensesMarkup = appContext.testApi.questionHTML(questions.find(question => question.id === "menses"));
+assert.match(mensesMarkup, /Không bắt buộc/);
+assert.match(mensesMarkup, /Không có kinh nguyệt/);
+assert.match(mensesMarkup, /disabled/);
+const indexMarkup = fs.readFileSync("index.html", "utf8");
+assert.match(indexMarkup, /Connect your true self with nature\./);
+assert.match(indexMarkup, /tel:\+84866222340/);
+assert.match(indexMarkup, /mailto:twinbeansfarm@gmail\.com/);
+assert.doesNotMatch(indexMarkup, /fonts\.googleapis\.com|brand-mark/);
+assert.match(fs.readFileSync("styles.css", "utf8"), /UVN Chuky/);
+console.log("Validated sections, bilingual fields, result edge cases, optional non-scoring Menses, and branding contacts.");

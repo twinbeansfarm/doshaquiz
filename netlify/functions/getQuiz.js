@@ -1,5 +1,8 @@
 exports.handler = async (event) => {
-  const id = event.queryStringParameters.id;
+  const id = event.queryStringParameters && event.queryStringParameters.id;
+  if (!id || !/^[a-z0-9]{6}$/i.test(id)) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid quiz profile id' }) };
+  }
   const url = `${process.env.SUPABASE_URL}/rest/v1/quizzes?id=eq.${id}&select=*`;
   const key = process.env.SUPABASE_KEY;
 
