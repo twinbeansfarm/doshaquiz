@@ -36,7 +36,7 @@ const t = {
     imbalance: "Current imbalance — Vikruti", rank: "Rank", primary: "Primary", secondary: "Secondary", tertiary: "Tertiary", tied: "Tied",
     noVikruti: "No current imbalance selected", noVikrutiBody: "You did not select any characteristics as a current imbalance.",
     copy: "Copy link", copied: "Link copied", share: "Share", sharedCopy: "Link copied", print: "Print", reset: "Retake quiz",
-    shareError: "We couldn't create a sharing link. Please try again.",
+    shareError: "We couldn't create a sharing link. Please try again.", sharedLoadError: "This shared profile could not be loaded. You can still take the quiz yourself.",
     viewQuiz: "Dosha Quiz", viewForm: "Intake Form", shared: "You are viewing a shared Dosha profile.",
     takeOwn: "Take the quiz yourself", notDiagnosis: "This educational reflection is not a medical diagnosis.",
     vataInfo: "Air & Space — the energy of movement. In balance, Vata supports creativity, vitality and adaptability. Out of balance, it may show as anxiety, dryness, irregular digestion or restlessness.",
@@ -61,7 +61,7 @@ const t = {
     rank: "Xếp hạng", primary: "Chính", secondary: "Phụ", tertiary: "Thứ ba", tied: "Đồng hạng",
     noVikruti: "Chưa ghi nhận mất cân bằng hiện tại", noVikrutiBody: "Bạn chưa chọn đặc điểm nào ở phần Mất cân bằng hiện tại.",
     copy: "Sao chép liên kết", copied: "Đã sao chép liên kết", share: "Chia sẻ", sharedCopy: "Đã sao chép liên kết", print: "In hồ sơ", reset: "Làm lại",
-    shareError: "Không thể tạo liên kết chia sẻ. Vui lòng thử lại.", viewQuiz: "Bài trắc nghiệm", viewForm: "Hồ sơ y tế",
+    shareError: "Không thể tạo liên kết chia sẻ. Vui lòng thử lại.", sharedLoadError: "Không thể tải hồ sơ được chia sẻ này. Bạn vẫn có thể làm bài trắc nghiệm của mình.", viewQuiz: "Bài trắc nghiệm", viewForm: "Hồ sơ y tế",
     shared: "Bạn đang xem một hồ sơ thể trạng được chia sẻ.", takeOwn: "Làm bài trắc nghiệm của tôi",
     notDiagnosis: "Nội dung mang tính giáo dục, không phải chẩn đoán y khoa.",
     vataInfo: "Khí & Không gian — năng lượng của chuyển động. Khi cân bằng, Vata hỗ trợ sự sáng tạo, sức sống và khả năng thích nghi. Khi mất cân bằng, có thể biểu hiện lo âu, khô ráp, tiêu hóa thất thường hoặc bồn chồn.",
@@ -114,7 +114,13 @@ function renderChrome() {
   document.getElementById("start-btn").textContent = x.start;
   document.getElementById("btn-view-quiz").textContent = x.viewQuiz;
   document.getElementById("btn-view-form").textContent = x.viewForm;
-  ["vi", "en"].forEach(lang => document.getElementById(`btn-${lang}`).classList.toggle("active", lang === currentLang));
+  ["vi", "en"].forEach(lang => {
+    const button = document.getElementById(`btn-${lang}`);
+    button.classList.toggle("active", lang === currentLang);
+    button.setAttribute("aria-pressed", String(lang === currentLang));
+  });
+  document.getElementById("btn-view-quiz").setAttribute("aria-pressed", String(currentView === "quiz"));
+  document.getElementById("btn-view-form").setAttribute("aria-pressed", String(currentView === "form"));
 }
 function startQuiz() {
   saveName();
@@ -132,6 +138,8 @@ function switchView(view) {
   document.getElementById("form-view").style.display = view === "form" ? "block" : "none";
   document.getElementById("btn-view-quiz").classList.toggle("active", view === "quiz");
   document.getElementById("btn-view-form").classList.toggle("active", view === "form");
+  document.getElementById("btn-view-quiz").setAttribute("aria-pressed", String(view === "quiz"));
+  document.getElementById("btn-view-form").setAttribute("aria-pressed", String(view === "form"));
   if (view === "form" && !document.getElementById("history-grid").children.length) renderHistory();
 }
 function renderHistory() {
@@ -322,6 +330,7 @@ function resetQuizData() {
 async function init() {
   document.body.dataset.view = "quiz";
   loadLocalData();
+  if (!Number.isInteger(currentSection) || currentSection < 0 || currentSection >= sectionIds.length) currentSection = 0;
   const params = new URLSearchParams(location.search);
   if (params.get("l") && t[params.get("l")]) currentLang = params.get("l");
   renderChrome();
@@ -341,7 +350,12 @@ async function init() {
       renderChrome();
       displayDashboard(getCurrentCounts(), true);
       return;
-    } catch (error) { console.error("Unable to load shared quiz", error); }
+    } catch (error) {
+      console.error("Unable to load shared quiz", error);
+      const banner = document.getElementById("shared-banner");
+      banner.textContent = t[currentLang].sharedLoadError;
+      banner.hidden = false;
+    }
   }
   if (started) startQuiz();
 }
