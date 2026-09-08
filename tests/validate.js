@@ -21,7 +21,7 @@ for (const question of questions) {
   }
 }
 
-const appSource = fs.readFileSync("app.js", "utf8").replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,setSelections:value=>{selections=value}};";
+const appSource = fs.readFileSync("app.js", "utf8").replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,normalizeProfile,createCombinedProfile,setVikrutiControlState,setSelections:value=>{selections=value}};";
 const appContext = {
   console,
   questions,
@@ -46,5 +46,26 @@ assert.match(indexMarkup, /Connect your true self with nature\./);
 assert.match(indexMarkup, /tel:\+84866222340/);
 assert.match(indexMarkup, /mailto:twinbeansfarm@gmail\.com/);
 assert.doesNotMatch(indexMarkup, /fonts\.googleapis\.com|brand-mark/);
+assert.doesNotMatch(indexMarkup, /Daytime Phone|City, ST, Zip|Family Physician|type="date"/);
+assert.match(indexMarkup, /Full name/);
+assert.match(indexMarkup, /Mobile phone/);
+assert.match(indexMarkup, /onclick="exportToText\('intake'\)"/);
+assert.match(indexMarkup, /onclick="sharePdf\('intake'\)"/);
 assert.match(fs.readFileSync("styles.css", "utf8"), /UVN Chuky/);
+const legacy = appContext.testApi.normalizeProfile({ name: "Old", prakruti: { face: "vata" }, vikruti: {} });
+assert.equal(legacy.version, 1);
+assert.equal(legacy.quiz.name, "Old");
+const combined = appContext.testApi.normalizeProfile({ version: 2, language: "vi", quiz: { name: "Mai", phone: "0866", email: "mai@example.com", prakruti: { menses: "not_applicable" }, vikruti: {} }, intake: { field_1: "August 2026", objective_2: true, history_me_3: true, history_family_4: true } });
+assert.equal(combined.version, 2);
+assert.equal(combined.quiz.phone, "0866");
+assert.equal(combined.intake.field_1, "August 2026");
+assert.equal(combined.intake.history_family_4, true);
+const serialized = appContext.testApi.createCombinedProfile({ name: "Mai", phone: "0866", email: "mai@example.com", prakruti: { face: "vata", menses: "not_applicable" }, vikruti: { face: "pitta" } }, { text_1: "notes", textarea_2: "diet", radio_3: true, checkbox_4: true, history_me_5: true, history_family_6: true }, "vi", "2026-09-08T00:00:00.000Z");
+assert.equal(serialized.version, 2);
+assert.equal(serialized.quiz.scores.prakruti.vata, 1);
+assert.equal(serialized.quiz.scores.prakruti.kapha, 0);
+assert.equal(serialized.intake.textarea_2, "diet");
+assert.equal(appContext.testApi.setVikrutiControlState({ querySelector: () => null }, true), false);
+const invalidEqual = appContext.testApi.normalizeProfile({ name: "", prakruti: { face: "vata" }, vikruti: { face: "vata" } });
+assert.equal(invalidEqual.quiz.vikruti.face, undefined);
 console.log("Validated sections, bilingual fields, result edge cases, optional non-scoring Menses, and branding contacts.");

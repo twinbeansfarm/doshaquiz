@@ -7,10 +7,11 @@ exports.handler = async (event) => {
   } catch {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid quiz profile' }) };
   }
-  if (!data || typeof data !== 'object' || typeof data.prakruti !== 'object' || typeof data.vikruti !== 'object') {
+  const quiz = data && data.version === 2 ? data.quiz : data;
+  if (!quiz || typeof quiz !== 'object' || typeof quiz.prakruti !== 'object' || typeof quiz.vikruti !== 'object') {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid quiz profile' }) };
   }
-  const shortId = Math.random().toString(36).substring(2, 8);
+  const profileId = require('crypto').randomUUID();
 
   const response = await fetch(url, {
     method: 'POST',
@@ -20,12 +21,12 @@ exports.handler = async (event) => {
       'Content-Type': 'application/json',
       'Prefer': 'return=minimal'
     },
-    body: JSON.stringify({ id: shortId, data: data })
+    body: JSON.stringify({ id: profileId, data: data })
   });
 
   if (!response.ok) {
     return { statusCode: 502, body: JSON.stringify({ error: 'Unable to save quiz profile' }) };
   }
 
-  return { statusCode: 200, body: JSON.stringify({ id: shortId }) };
+  return { statusCode: 200, body: JSON.stringify({ id: profileId }) };
 };

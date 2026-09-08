@@ -30,14 +30,14 @@
         <p id="intro-copy" class="intro-copy"></p>
         <div class="concepts"><div><h2>Prakruti</h2><p id="prakruti-copy"></p></div><div><h2>Vikruti</h2><p id="vikruti-copy"></p></div></div>
         <p id="quiz-meta" class="quiz-meta"></p>
-        <label class="name-field"><span id="name-label"></span><input id="user-name" class="glass-input" type="text" autocomplete="name" maxlength="100"></label>
+        <fieldset class="profile-fields"><legend id="profile-fields-title"></legend><label><span id="name-label"></span><input id="user-name" class="glass-input" type="text" autocomplete="name" maxlength="100"></label><label><span id="phone-label"></span><input id="user-phone" class="glass-input" type="tel" autocomplete="tel" maxlength="40"></label><label><span id="email-label"></span><input id="user-email" class="glass-input" type="email" autocomplete="email" maxlength="120"></label></fieldset>
         <button id="start-btn" class="primary-btn" onclick="startQuiz()"></button>
       </section>
       <section id="questionnaire" hidden>
         <div class="quiz-toolbar">
           <div class="section-tabs" id="section-tabs" aria-label="Quiz sections"></div>
           <div class="progress-meta"><span id="section-meta"></span><span id="answer-meta"></span></div>
-          <div class="progress-track" role="progressbar" aria-label="Long-term tendency progress" aria-valuemin="0" aria-valuemax="31"><span id="progress-bar"></span></div>
+          <div class="progress-track" role="progressbar" aria-label="Long-term tendency progress" aria-valuemin="0" aria-valuemax="30"><span id="progress-bar"></span></div>
         </div>
         <div class="question-guide"><div><i class="radio-demo"></i><span><b id="long-label"></b><small id="long-help"></small></span></div><div><i class="check-demo"></i><span><b id="current-label"></b><small id="current-help"></small></span></div></div>
         <div id="quiz-content"></div>
@@ -56,18 +56,14 @@
             <div class="form-block">
                 <h2 class="form-title">Personal Details</h2>
                 <div class="form-grid">
-                    <div class="form-group print-half"><label class="form-label">Client Name</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Daytime Phone</label><input type="text" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label">Full name</label><input type="text" class="glass-input" name="full_name"></div>
                     <div class="form-group full-width"><label class="form-label">Address</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">City, ST, Zip</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Email</label><input type="email" class="glass-input"></div>
-                    <div class="form-group print-quarter"><label class="form-label">Cell</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-quarter"><label class="form-label">Age</label><input type="number" class="glass-input"></div>
-                    <div class="form-group print-quarter"><label class="form-label">DOB</label><input type="date" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label">Mobile phone</label><input type="tel" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label">Date of birth</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Marital Status</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Occupation</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Referred By</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Family Physician</label><input type="text" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label">Referred by (if any)</label><input type="text" class="glass-input"></div>
                 </div>
             </div>
 
@@ -104,7 +100,7 @@
                     <div class="form-group full-width">
                         <label class="checkbox-label" style="font-weight:600;"><input type="checkbox"> Are you currently under a physician’s care?</label>
                     </div>
-                    <div class="form-group print-half"><label class="form-label">Last Physical Exam Date</label><input type="date" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label">Last Physical Exam Date</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Height</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Weight</label><input type="text" class="glass-input"></div>
                     <div class="form-group full-width">
@@ -148,11 +144,11 @@
                 </p>
             </div>
             
-            <div class="intake-print-actions print-hide"><button id="print-intake-btn" class="primary-btn" onclick="printIntake()">Print Intake Form</button></div>
+            <div id="intake-feedback" class="action-feedback" role="status" aria-live="polite"></div><div class="intake-print-actions print-hide"><button id="copy-intake-btn" class="action-btn" onclick="exportToText('intake')">Copy link</button><button id="share-intake-btn" class="action-btn" onclick="sharePdf('intake')">Share profile</button><button id="print-intake-btn" class="primary-btn" onclick="printIntake()">Print Intake Form</button></div>
         </div>
 
           </main>
   <footer><a class="footer-brand" href="https://twinbeansfarm.com/">Twin Beans Farm</a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
   <section id="print-profile" aria-hidden="true"></section>
-  <script src="quiz-data.js"></script><script src="app.js"></script>
+  <script src="quiz-data.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script><script src="app.js"></script>
 </body></html>
