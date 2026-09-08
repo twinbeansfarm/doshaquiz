@@ -10,6 +10,13 @@ exports.handler = async (event) => {
     }
   });
 
+  if (!response.ok) {
+    return { statusCode: 502, body: JSON.stringify({ error: 'Unable to load quiz profile' }) };
+  }
+
   const result = await response.json();
+  if (!result.length) {
+    return { statusCode: 404, body: JSON.stringify({ error: 'Quiz profile not found' }) };
+  }
   return { statusCode: 200, body: JSON.stringify(result[0].data) };
 };
