@@ -1,0 +1,24 @@
+const assert = require('assert');
+process.env.RESEND_API_KEY = 're_test';
+process.env.RESEND_FROM_EMAIL = 'profiles@example.com';
+const sendEmail = require('../netlify/functions/sendProfileEmail').handler;
+const pdf = Buffer.from('%PDF-1.4\n%%EOF').toString('base64');
+const base = kind => ({ httpMethod: 'POST', body: JSON.stringify({ kind, language: 'vi', client: { name: 'Mai', email: 'mai@example.com', phone: '0866', dateOfBirth: '1990-01-02' }, attachment: { filename: `${kind}.pdf`, contentType: 'application/pdf', content: pdf } }) });
+(async () => {
+  let request;
+  global.fetch = async (url, options) => { request = { url, options, body: JSON.parse(options.body) }; return { ok: true }; };
+  assert.equal((await sendEmail(base('quiz'))).statusCode, 200);
+  assert.deepEqual(request.body.to, ['twinbeansfarm@gmail.com']);
+  assert.match(request.body.subject, /Hồ sơ Ayurveda - Mai/);
+  assert.equal((await sendEmail(base('intake'))).statusCode, 200);
+  assert.match(request.body.subject, /Hồ sơ y tế Ayurveda - Mai/);
+  assert.equal((await sendEmail({ httpMethod: 'POST', body: '{}' })).statusCode, 400);
+  assert.equal((await sendEmail({ httpMethod: 'POST', headers: { 'content-type': 'text/plain' }, body: '{}' })).statusCode, 415);
+  const wrongType = base('quiz'); wrongType.body = JSON.stringify({ ...JSON.parse(wrongType.body), attachment: { content: pdf, filename: 'x.txt', contentType: 'text/plain' } });
+  assert.equal((await sendEmail(wrongType)).statusCode, 400);
+  const noPdf = base('quiz'); noPdf.body = JSON.stringify({ ...JSON.parse(noPdf.body), attachment: { filename: 'x.pdf', contentType: 'application/pdf' } });
+  assert.equal((await sendEmail(noPdf)).statusCode, 400);
+  global.fetch = async () => ({ ok: false });
+  assert.equal((await sendEmail(base('quiz'))).statusCode, 502);
+  console.log('Validated secure Quiz/Intake PDF email requests and Resend failure handling.');
+})().catch(error => { console.error(error); process.exitCode = 1; });
