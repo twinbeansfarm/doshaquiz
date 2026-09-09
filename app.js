@@ -36,9 +36,9 @@ const t = {
     namedTitle: name => `${name}'s Ayurvedic Profile`, natural: "Natural constitution — Prakruti",
     imbalance: "Current imbalance — Vikruti", rank: "Rank", primary: "Primary", secondary: "Secondary", tertiary: "Tertiary", tied: "Tied",
     noVikruti: "No current imbalance selected", noVikrutiBody: "You did not select any characteristics as a current imbalance.",
-    copy: "Copy link", copied: "Profile link copied", share: "Share", shareProfile: "Share profile", sharedCopy: "Profile link copied", print: "Print profile", reset: "Retake quiz",
+    share: "Share", shareProfile: "Share profile", send: "Send to Twin Beans Farm", sending: "Sending profile...", sent: "Profile sent to Twin Beans Farm.", sendError: "Unable to send the profile. Please try again.", intakeRequired: "Please complete Full name, Email, Mobile phone and Date of birth.", print: "Print profile", reset: "Retake quiz",
     shareError: "We couldn't create a sharing link. Please try again.", sharedLoadError: "This shared profile could not be loaded. You can still take the quiz yourself.",
-    viewQuiz: "Dosha Quiz", viewForm: "Intake Form", printIntake: "Print Intake Form", shared: "You are viewing a shared Dosha profile.", printDate: "Print date", language: "Language",
+    viewQuiz: "Dosha Quiz", viewForm: "Intake Form", printIntake: "Print Intake Form", me: "Me", family: "Family", shared: "You are viewing a shared Dosha profile.", printDate: "Print date", language: "Language",
     takeOwn: "Create my own profile", notDiagnosis: "The quiz results are for reference only and are not a medical diagnosis. Please contact a Twin Beans Farm specialist for consultation.",
     vataInfo: "Air & Space — the energy of movement. In balance, Vata supports creativity, vitality and adaptability. Out of balance, it may show as anxiety, dryness, irregular digestion or restlessness.",
     pittaInfo: "Fire & Water — the energy of transformation. In balance, Pitta supports intelligence, courage and strong digestion. Out of balance, it may show as irritability, excess heat, inflammation or burnout.",
@@ -61,9 +61,9 @@ const t = {
     natural: "Thể trạng tự nhiên — Prakruti", imbalance: "Mất cân bằng hiện tại — Vikruti",
     rank: "Xếp hạng", primary: "Chính", secondary: "Phụ", tertiary: "Thứ ba", tied: "Đồng hạng",
     noVikruti: "Chưa ghi nhận mất cân bằng hiện tại", noVikrutiBody: "Bạn chưa chọn đặc điểm nào ở phần Mất cân bằng hiện tại.",
-    copy: "Sao chép liên kết", copied: "Đã sao chép liên kết hồ sơ", share: "Chia sẻ", shareProfile: "Chia sẻ hồ sơ", sharedCopy: "Đã sao chép liên kết hồ sơ", print: "In hồ sơ", reset: "Làm lại",
+    share: "Chia sẻ", shareProfile: "Chia sẻ hồ sơ", send: "Gửi Twin Beans Farm", sending: "Đang gửi hồ sơ...", sent: "Đã gửi hồ sơ đến Twin Beans Farm.", sendError: "Không thể gửi hồ sơ. Vui lòng thử lại.", intakeRequired: "Vui lòng điền đầy đủ Họ và tên, Email, Điện thoại di động và Ngày tháng năm sinh.", print: "In hồ sơ", reset: "Làm lại",
     shareError: "Không thể tạo liên kết chia sẻ. Vui lòng thử lại.", sharedLoadError: "Không thể tải hồ sơ được chia sẻ này. Bạn vẫn có thể làm bài trắc nghiệm của mình.", viewQuiz: "Bài trắc nghiệm", viewForm: "Hồ sơ y tế",
-    shared: "Hồ sơ Ayurveda được chia sẻ", takeOwn: "Làm hồ sơ của tôi", printIntake: "In Hồ sơ y tế", printDate: "Ngày in", language: "Ngôn ngữ",
+    shared: "Hồ sơ Ayurveda được chia sẻ", takeOwn: "Làm hồ sơ của tôi", printIntake: "In Hồ sơ y tế", me: "Tôi", family: "Gia đình", printDate: "Ngày in", language: "Ngôn ngữ",
     notDiagnosis: "Kết quả bài trắc nghiệm mang tính tham khảo, và không phải chẩn đoán y khoa. Vui lòng liên hệ chuyên gia của Twin Beans Farm để được tư vấn.",
     vataInfo: "Khí & Không gian — năng lượng của chuyển động. Khi cân bằng, Vata hỗ trợ sự sáng tạo, sức sống và khả năng thích nghi. Khi mất cân bằng, có thể biểu hiện lo âu, khô ráp, tiêu hóa thất thường hoặc bồn chồn.",
     pittaInfo: "Lửa & Nước — năng lượng của chuyển hóa. Khi cân bằng, Pitta hỗ trợ trí tuệ, lòng can đảm và tiêu hóa khỏe. Khi mất cân bằng, có thể biểu hiện cáu kỉnh, dư nhiệt, viêm hoặc kiệt sức.",
@@ -72,7 +72,7 @@ const t = {
 };
 
 const intakeVi = {
-  "Full name":"Họ và tên","Mobile phone":"Điện thoại di động","Date of birth":"Ngày tháng năm sinh","Referred by (if any)":"Người giới thiệu (nếu có)","Health Information & History Intake":"Hồ sơ thông tin và tiền sử sức khỏe","Personal Details":"Thông tin cá nhân","Client Name":"Họ và tên","Daytime Phone":"Điện thoại liên hệ ban ngày","Address":"Địa chỉ","City, ST, Zip":"Thành phố, tỉnh/bang, mã bưu chính","Email":"Email","Cell":"Điện thoại di động","Age":"Tuổi","DOB":"Ngày sinh","Marital Status":"Tình trạng hôn nhân","Occupation":"Nghề nghiệp","Referred By":"Người giới thiệu","Family Physician":"Bác sĩ gia đình","Objectives":"Mục tiêu","Select the item below that reflects your main objective (one only). Please note that Ayurvedic Consultations do not include medical diagnosis and treatments. If you are concerned about a medical condition, you should see a medical doctor.":"Chọn một mục phản ánh mục tiêu chính của bạn. Tư vấn Ayurveda không bao gồm chẩn đoán hay điều trị y khoa. Nếu lo ngại về một tình trạng bệnh lý, bạn nên gặp bác sĩ.",
+  "Full name":"Họ và tên","Full name *":"Họ và tên *","Email *":"Email *","Mobile phone *":"Điện thoại di động *","Date of birth *":"Ngày tháng năm sinh *","Mobile phone":"Điện thoại di động","Date of birth":"Ngày tháng năm sinh","Referred by (if any)":"Người giới thiệu (nếu có)","Health Information & History Intake":"Hồ sơ thông tin và tiền sử sức khỏe","Personal Details":"Thông tin cá nhân","Client Name":"Họ và tên","Daytime Phone":"Điện thoại liên hệ ban ngày","Address":"Địa chỉ","City, ST, Zip":"Thành phố, tỉnh/bang, mã bưu chính","Email":"Email","Cell":"Điện thoại di động","Age":"Tuổi","DOB":"Ngày sinh","Marital Status":"Tình trạng hôn nhân","Occupation":"Nghề nghiệp","Referred By":"Người giới thiệu","Family Physician":"Bác sĩ gia đình","Objectives":"Mục tiêu","Select the item below that reflects your main objective (one only). Please note that Ayurvedic Consultations do not include medical diagnosis and treatments. If you are concerned about a medical condition, you should see a medical doctor.":"Chọn một mục phản ánh mục tiêu chính của bạn. Tư vấn Ayurveda không bao gồm chẩn đoán hay điều trị y khoa. Nếu lo ngại về một tình trạng bệnh lý, bạn nên gặp bác sĩ.",
   "I want an alternative approach to allopathic medicine for managing illness and disease":"Tôi muốn một phương pháp bổ trợ cho y học hiện đại trong việc quản lý bệnh tật","I want to improve my general health and wellness and reduce my vulnerability to illness and disease":"Tôi muốn cải thiện sức khỏe tổng thể và giảm nguy cơ bệnh tật","I want to improve my lifestyle and dietary practices to improve my health":"Tôi muốn cải thiện lối sống và chế độ ăn để nâng cao sức khỏe","I want to change my habits and behavioral patterns to improve my relationships with others":"Tôi muốn thay đổi thói quen và hành vi để cải thiện các mối quan hệ","I want to manage stress, tension and worry to attain a more stable emotional nature":"Tôi muốn quản lý căng thẳng và lo âu để cảm xúc ổn định hơn","What do you want to achieve in terms of your health and wellness? Please also tell us your current concerns.":"Bạn muốn đạt được điều gì về sức khỏe và sự an lành? Vui lòng chia sẻ những mối quan tâm hiện tại.",
   "Medical History":"Tiền sử sức khỏe","Check appropriate boxes if you or your family members have a history of the following:":"Đánh dấu nếu bạn hoặc người thân có tiền sử các tình trạng sau:","Any Other Diseases Or Problems? (Illnesses, injuries, addictions, weight changes, surgeries, etc.)":"Bệnh hoặc vấn đề nào khác? (Bệnh tật, chấn thương, nghiện, thay đổi cân nặng, phẫu thuật, v.v.)","Current Health & Vitals":"Sức khỏe hiện tại và chỉ số cơ thể","Are you currently under a physician’s care?":"Hiện bạn có đang được bác sĩ theo dõi không?","Last Physical Exam Date":"Ngày khám sức khỏe gần nhất","Height":"Chiều cao","Weight":"Cân nặng","What prescription drugs are you taking (including birth control)?":"Bạn đang dùng thuốc kê đơn nào (bao gồm thuốc tránh thai)?","What non-prescriptions drugs, supplements, or recreational drugs are you taking (including alcohol, tobacco, caffeine)?":"Bạn đang dùng thuốc không kê đơn, thực phẩm bổ sung hoặc chất kích thích nào (bao gồm rượu, thuốc lá, caffeine)?","Diet & Elimination":"Chế độ ăn và bài tiết","Please write down all food you have eaten and drank for the last three days, with timing.":"Vui lòng ghi lại toàn bộ thức ăn, đồ uống và thời điểm sử dụng trong ba ngày gần đây.","When and how often do you eliminate? What does your poop look like (color, shape, quantity, odor)?":"Bạn đi tiêu khi nào và bao lâu một lần? Phân có màu sắc, hình dạng, lượng và mùi như thế nào?","Required Photos":"Ảnh cần cung cấp","Please email the following photos before your first appointment (at least 48 hours prior), and at least once a year afterwards. You can send separate photos, or save all together in a google drive link.":"Vui lòng gửi email các ảnh sau trước buổi hẹn đầu tiên ít nhất 48 giờ và ít nhất mỗi năm một lần sau đó. Có thể gửi từng ảnh hoặc một liên kết Google Drive.","Full length photo from the front":"Ảnh toàn thân nhìn từ phía trước","Full length profile from the side":"Ảnh toàn thân nhìn nghiêng","Close up of face":"Ảnh cận mặt","Close up of both hands, palms downward":"Ảnh cận hai bàn tay, lòng bàn tay úp xuống","Entire top of tongue, including back (when you first wake up in the morning, before scraping)":"Toàn bộ mặt trên của lưỡi, gồm phần sau (ngay khi thức dậy, trước khi cạo lưỡi)","Close up of eyes looking to the right & left":"Ảnh cận mắt khi nhìn sang phải và trái","Full length childhood photo before the age of 5":"Ảnh toàn thân thời thơ ấu trước 5 tuổi","Print Intake Form":"In Hồ sơ y tế","Me":"Tôi","Fam":"Gia đình",
   "Allergies to Food/Drugs/Mold":"Dị ứng thực phẩm/thuốc/nấm mốc","Anemia":"Thiếu máu","Arthritis":"Viêm khớp","Asthma, Pneumonia, TB":"Hen suyễn, viêm phổi, lao","Autoimmune Disease":"Bệnh tự miễn","Blood Pressure (High/Low)":"Huyết áp (cao/thấp)","Cancer / Chemotherapy / Radiation":"Ung thư / hóa trị / xạ trị","Chest Pain/Angina":"Đau ngực/đau thắt ngực","Cholesterol / Triglycerides (High)":"Cholesterol / triglyceride cao","Contact Lenses / Prescription Glasses":"Kính áp tròng / kính thuốc","Dental Treatment Complications":"Biến chứng điều trị nha khoa","Diabetes":"Tiểu đường","Dizziness, Fainting":"Chóng mặt, ngất","Epilepsy, Convulsions, Seizures":"Động kinh, co giật","Feet or Ankles, Swelling":"Sưng bàn chân hoặc mắt cá","Glaucoma, Eye Surgery":"Tăng nhãn áp, phẫu thuật mắt","Headaches/Migraines":"Đau đầu/đau nửa đầu","Heart Attack / Disease / Surgery":"Nhồi máu / bệnh / phẫu thuật tim","Heart Murmur, Palpitations":"Tiếng thổi tim, đánh trống ngực","Hepatitis A / B / Other":"Viêm gan A / B / khác","HIV Exposure":"Phơi nhiễm HIV","IBS, Colitis, Crohn’s, Celiac, etc.":"IBS, viêm đại tràng, Crohn, Celiac, v.v.","Implant, Prosthesis":"Thiết bị cấy ghép, bộ phận giả","Kidney or Bladder Disease / Infection":"Bệnh / nhiễm trùng thận hoặc bàng quang","Mononucleosis, Jaundice, Gallstone":"Tăng bạch cầu đơn nhân, vàng da, sỏi mật","Pain/Ringing in the Ear":"Đau / ù tai","Parasites / Tropical / Chronic Infection":"Ký sinh trùng / nhiễm trùng nhiệt đới / mạn tính","Popping, Clicking, Locking of the Jaw":"Khớp hàm kêu, lục cục hoặc khóa","Prolonged Bleeding When Cut":"Chảy máu kéo dài khi bị thương","Psychiatric Treatment":"Điều trị tâm thần","Rheumatic / High Fever":"Thấp khớp / sốt cao","Shortness of Breath":"Khó thở","Stroke, Cerebro-Vascular Accident":"Đột quỵ, tai biến mạch máu não","Thyroid Disease or Medication":"Bệnh hoặc thuốc tuyến giáp","Ulcers, Intestinal Bleeding":"Loét, xuất huyết đường ruột","Venereal Diseases":"Bệnh lây truyền qua đường tình dục"
@@ -117,6 +117,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
   if (!isSharedView) localStorage.setItem(STORAGE.language, lang);
   renderChrome();
+  if (document.getElementById("history-grid").children.length) renderHistory();
   if (showingResults) displayDashboard(getCurrentCounts(), isSharedView);
   else if (questionnaireOpen) renderQuiz();
 }
@@ -171,7 +172,7 @@ function updateIntakeLanguage() {
     if (translated) node.nodeValue = original.replace(key, translated);
   }
   document.getElementById("print-intake-btn").textContent = t[currentLang].printIntake;
-  document.getElementById("copy-intake-btn").textContent = t[currentLang].copy;
+  document.getElementById("send-intake-btn").textContent = t[currentLang].send;
   document.getElementById("share-intake-btn").textContent = t[currentLang].shareProfile;
 }
 function startQuiz() {
@@ -194,7 +195,8 @@ function switchView(view) {
   if (view === "form" && !document.getElementById("history-grid").children.length) renderHistory();
 }
 function renderHistory() {
-  document.getElementById("history-grid").innerHTML = historyOptions.map((option, index) => `<div class="history-item"><span>${esc(option)}</span><div class="history-checks"><label><input type="checkbox" name="history-me-${index}"> Me</label><label><input type="checkbox" name="history-family-${index}"> Fam</label></div></div>`).join("");
+  const x = t[currentLang];
+  document.getElementById("history-grid").innerHTML = `<div class="history-header"><span></span><span>${x.me}</span><span>${x.family}</span></div>${historyOptions.map((option, index) => `<div class="history-item"><span class="history-label">${esc(currentLang === "vi" ? intakeVi[option] || option : option)}</span><label class="history-choice" aria-label="${esc(`${option} — ${x.me}`)}"><input type="checkbox" name="history-me-${index}"><span class="sr-only">${x.me}</span></label><label class="history-choice" aria-label="${esc(`${option} — ${x.family}`)}"><input type="checkbox" name="history-family-${index}"><span class="sr-only">${x.family}</span></label></div>`).join("")}`;
   updateIntakeLanguage();
   prepareIntakeControls();
 }
@@ -217,7 +219,7 @@ function prepareIntakeControls() {
     }
     control.disabled = isSharedView;
   });
-  document.getElementById("copy-intake-btn").hidden = isSharedView;
+  document.getElementById("send-intake-btn").hidden = isSharedView;
   document.getElementById("share-intake-btn").hidden = isSharedView;
 }
 function saveIntakeData() {
@@ -447,14 +449,22 @@ function buildIntakePdfDocument() {
   document.body.appendChild(documentNode);
   return documentNode;
 }
-async function sharePdf(kind) {
+async function generatePdf(kind) {
   const source = kind === "intake" ? buildIntakePdfDocument() : (buildPrintProfile(getCurrentCounts()), document.getElementById("print-profile"));
   if (kind === "quiz") source.classList.add("pdf-export");
-  const filename = `TwinBeansFarm_${kind === "intake" ? "Health" : "Ayurveda"}_Profile_${safeFilename(selections.name)}_${new Date().toISOString().slice(0, 10)}.pdf`;
+  const filename = `TwinBeansFarm_${kind === "intake" ? "Health" : "Ayurveda"}_Profile_${safeFilename(kind === "intake" ? document.getElementById("intake-full-name").value : selections.name)}_${new Date().toISOString().slice(0, 10)}.pdf`;
   try {
     if (typeof html2pdf !== "function") throw new Error("PDF generator unavailable");
     const blob = await html2pdf().set({ margin: 8, filename, image: { type: "jpeg", quality: .96 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, pagebreak: { mode: ["css", "legacy"] } }).from(source).outputPdf("blob");
-    const file = new File([blob], filename, { type: "application/pdf" });
+    return { blob, file: new File([blob], filename, { type: "application/pdf" }), filename };
+  } finally {
+    if (kind === "intake") source.remove();
+    else source.classList.remove("pdf-export");
+  }
+}
+async function sharePdf(kind) {
+  try {
+    const { blob, file, filename } = await generatePdf(kind);
     if (navigator.share && navigator.canShare?.({ files: [file] })) await navigator.share({ files: [file], title: filename });
     else {
       const link = document.createElement("a");
@@ -464,16 +474,59 @@ async function sharePdf(kind) {
     }
   } catch (error) {
     if (error.name !== "AbortError") showActionFeedback(currentLang === "vi" ? "Không thể tạo PDF. Vui lòng thử lại." : "The PDF could not be created. Please try again.", true, kind);
+  }
+}
+function validateIntakeRequired() {
+  const form = document.getElementById("form-view");
+  const required = [...form.querySelectorAll("[required]")];
+  const invalid = required.find(control => !control.checkValidity());
+  if (!invalid) return true;
+  showActionFeedback(t[currentLang].intakeRequired, true, "intake");
+  invalid.reportValidity();
+  invalid.focus({ preventScroll: true });
+  invalid.scrollIntoView({ behavior: "smooth", block: "center" });
+  return false;
+}
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+async function sendProfileEmail(kind) {
+  if (kind === "intake" && !validateIntakeRequired()) return;
+  const button = document.getElementById(kind === "intake" ? "send-intake-btn" : "send-quiz-btn");
+  if (!button || button.disabled) return;
+  button.disabled = true;
+  button.textContent = t[currentLang].sending;
+  showActionFeedback(t[currentLang].sending, false, kind);
+  try {
+    const { blob, filename } = await generatePdf(kind);
+    const intakeName = document.getElementById("intake-full-name").value.trim();
+    const client = kind === "intake" ? {
+      name: intakeName,
+      email: document.getElementById("intake-email").value.trim(),
+      phone: document.getElementById("intake-mobile-phone").value.trim(),
+      dateOfBirth: document.getElementById("intake-date-of-birth").value
+    } : { name: selections.name, email: selections.email, phone: selections.phone };
+    const response = await fetch("/.netlify/functions/sendProfileEmail", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind, language: currentLang, client, attachment: { filename, contentType: "application/pdf", content: await blobToBase64(blob) } }) });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    showActionFeedback(t[currentLang].sent, false, kind);
+  } catch (error) {
+    console.error("Unable to send profile", error);
+    showActionFeedback(t[currentLang].sendError, true, kind);
   } finally {
-    if (kind === "intake") source.remove();
-    else source.classList.remove("pdf-export");
+    button.disabled = false;
+    button.textContent = t[currentLang].send;
   }
 }
 if (typeof window !== "undefined") window.addEventListener("afterprint", () => document.body.classList.remove("print-profile", "print-intake"));
 function displayDashboard(counts, shared) {
   const x = t[currentLang];
   const title = selections.name ? x.namedTitle(esc(selections.name)) : x.resultsTitle;
-  document.getElementById("results").innerHTML = `<div class="results-shell"><header class="results-head"><p class="eyebrow">Twin Beans Farm · Ayurveda</p><h1>${title}</h1><p>${x.notDiagnosis}</p></header><div class="results-grid">${resultPanel("prakruti", x.natural, counts.prakruti)}${resultPanel("vikruti", x.imbalance, counts.vikruti)}</div><div class="action-feedback" id="action-feedback" role="status" aria-live="polite"></div><div class="action-buttons">${shared ? `<button class="primary-btn" onclick="takeOwnQuiz()">${x.takeOwn}</button>` : `<button id="copy-btn" class="action-btn" onclick="exportToText()">${x.copy}</button><button id="share-btn" class="action-btn" onclick="sharePdf('quiz')">${x.share}</button>`}<button class="action-btn" onclick="printProfile()">${x.print}</button>${shared ? "" : `<button class="action-btn" onclick="resetQuizData()">${x.reset}</button>`}</div><div class="dosha-info-grid">${doshas.map(dosha => `<article class="dosha-info-card ${dosha}"><h3>${dosha[0].toUpperCase() + dosha.slice(1)}</h3><p>${x[`${dosha}Info`]}</p></article>`).join("")}</div></div>`;
+  document.getElementById("results").innerHTML = `<div class="results-shell"><header class="results-head"><p class="eyebrow">Twin Beans Farm · Ayurveda</p><h1>${title}</h1><p>${x.notDiagnosis}</p></header><div class="results-grid">${resultPanel("prakruti", x.natural, counts.prakruti)}${resultPanel("vikruti", x.imbalance, counts.vikruti)}</div><div class="action-feedback" id="action-feedback" role="status" aria-live="polite"></div><div class="action-buttons">${shared ? `<button class="primary-btn" onclick="takeOwnQuiz()">${x.takeOwn}</button>` : `<button id="send-quiz-btn" class="primary-btn" onclick="sendProfileEmail('quiz')">${x.send}</button><button id="share-btn" class="action-btn" onclick="sharePdf('quiz')">${x.share}</button>`}<button class="action-btn" onclick="printProfile()">${x.print}</button>${shared ? "" : `<button class="action-btn" onclick="resetQuizData()">${x.reset}</button>`}</div><div class="dosha-info-grid">${doshas.map(dosha => `<article class="dosha-info-card ${dosha}"><h3>${dosha[0].toUpperCase() + dosha.slice(1)}</h3><p>${x[`${dosha}Info`]}</p></article>`).join("")}</div></div>`;
   buildPrintProfile(counts);
 }
 function showActionFeedback(message, isError = false, source = "quiz") {
@@ -481,52 +534,7 @@ function showActionFeedback(message, isError = false, source = "quiz") {
   feedback.textContent = message;
   feedback.classList.toggle("error", isError);
 }
-async function saveShared() {
-  const response = await fetch("/.netlify/functions/saveQuiz", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(combinedProfile()) });
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  const result = await response.json();
-  return `${location.origin}${location.pathname}?id=${encodeURIComponent(result.id)}&l=${currentLang}`;
-}
-async function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-  const input = document.createElement("textarea");
-  input.value = text;
-  input.setAttribute("readonly", "");
-  input.style.position = "fixed";
-  input.style.opacity = "0";
-  document.body.appendChild(input);
-  input.select();
-  const copied = document.execCommand("copy");
-  input.remove();
-  if (!copied) throw new Error("Clipboard unavailable");
-}
-async function exportToText(source = "quiz") {
-  try {
-    await copyText(await saveShared());
-    const button = document.getElementById(source === "intake" ? "copy-intake-btn" : "copy-btn");
-    if (button) button.textContent = t[currentLang].copied;
-    showActionFeedback(t[currentLang].copied, false, source);
-  } catch (error) {
-    console.error("Unable to copy shared profile", error);
-    showActionFeedback(t[currentLang].shareError, true, source);
-  }
-}
-async function shareResults() {
-  try {
-    const url = await saveShared();
-    if (navigator.share) await navigator.share({ title: selections.name ? t[currentLang].namedTitle(selections.name) : t[currentLang].resultsTitle, url });
-    else {
-      await copyText(url);
-      document.getElementById("share-btn").textContent = t[currentLang].sharedCopy;
-      showActionFeedback(t[currentLang].sharedCopy);
-    }
-  } catch (error) {
-    if (error.name !== "AbortError") {
-      console.error("Unable to share profile", error);
-      showActionFeedback(t[currentLang].shareError, true);
-    }
-  }
-}
+
 function takeOwnQuiz() {
   isSharedView = false;
   selections = { name: "", phone: "", email: "", prakruti: {}, vikruti: {} };

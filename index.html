@@ -46,7 +46,7 @@
       </section>
       <section id="results" aria-live="polite"></section>
     </section>
-<div id="form-view" style="display: none;">
+<form id="form-view" style="display: none;" onsubmit="return false;">
             <div class="form-block">
                 <h2 class="form-title">Health Information & History Intake</h2>
                 <p style="font-size: 0.9em; line-height: 1.6; color: #555; margin-bottom: 20px;" class="print-hide">
@@ -56,11 +56,11 @@
             <div class="form-block">
                 <h2 class="form-title">Personal Details</h2>
                 <div class="form-grid">
-                    <div class="form-group print-half"><label class="form-label">Full name</label><input type="text" class="glass-input" name="full_name"></div>
+                    <div class="form-group print-half"><label class="form-label" for="intake-full-name">Full name *</label><input id="intake-full-name" type="text" class="glass-input" name="full_name" required></div>
                     <div class="form-group full-width"><label class="form-label">Address</label><input type="text" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Email</label><input type="email" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Mobile phone</label><input type="tel" class="glass-input"></div>
-                    <div class="form-group print-half"><label class="form-label">Date of birth</label><input type="text" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label" for="intake-email">Email *</label><input id="intake-email" type="email" class="glass-input" name="email" required></div>
+                    <div class="form-group print-half"><label class="form-label" for="intake-mobile-phone">Mobile phone *</label><input id="intake-mobile-phone" type="tel" class="glass-input" name="mobile_phone" required></div>
+                    <div class="form-group print-half"><label class="form-label" for="intake-date-of-birth">Date of birth *</label><input id="intake-date-of-birth" type="date" class="glass-input" name="date_of_birth" required></div>
                     <div class="form-group print-quarter"><label class="form-label">Marital Status</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Occupation</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Referred by (if any)</label><input type="text" class="glass-input"></div>
@@ -100,7 +100,7 @@
                     <div class="form-group full-width">
                         <label class="checkbox-label" style="font-weight:600;"><input type="checkbox"> Are you currently under a physician’s care?</label>
                     </div>
-                    <div class="form-group print-half"><label class="form-label">Last Physical Exam Date</label><input type="text" class="glass-input"></div>
+                    <div class="form-group print-half"><label class="form-label" for="last-physical-exam">Last Physical Exam Date</label><input id="last-physical-exam" name="last_physical_exam" type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Height</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Weight</label><input type="text" class="glass-input"></div>
                     <div class="form-group full-width">
@@ -144,8 +144,8 @@
                 </p>
             </div>
             
-            <div id="intake-feedback" class="action-feedback" role="status" aria-live="polite"></div><div class="intake-print-actions print-hide"><button id="copy-intake-btn" class="action-btn" onclick="exportToText('intake')">Copy link</button><button id="share-intake-btn" class="action-btn" onclick="sharePdf('intake')">Share profile</button><button id="print-intake-btn" class="primary-btn" onclick="printIntake()">Print Intake Form</button></div>
-        </div>
+            <div id="intake-feedback" class="action-feedback" role="status" aria-live="polite"></div><div class="intake-print-actions print-hide"><button type="button" id="send-intake-btn" class="primary-btn" onclick="sendProfileEmail('intake')">Send to Twin Beans Farm</button><button type="button" id="share-intake-btn" class="action-btn" onclick="sharePdf('intake')">Share profile</button><button type="button" id="print-intake-btn" class="action-btn" onclick="printIntake()">Print Intake Form</button></div>
+        </form>
 
           </main>
   <footer><a class="footer-brand" href="https://twinbeansfarm.com/">Twin Beans Farm</a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
