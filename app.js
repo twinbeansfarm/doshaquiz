@@ -4,7 +4,6 @@ const STORAGE = {
   selections: "doshaSelections",
   language: "doshaLanguage",
   section: "doshaSection",
-  started: "doshaStarted",
   intake: "doshaIntakeData"
 };
 const sectionIds = ["physical", "functional", "psychological"];
@@ -12,7 +11,7 @@ const doshas = ["vata", "pitta", "kapha"];
 let currentLang = localStorage.getItem(STORAGE.language) || "vi";
 let currentView = "quiz";
 let currentSection = Number(localStorage.getItem(STORAGE.section) || 0);
-let started = localStorage.getItem(STORAGE.started) === "true";
+let questionnaireOpen = false;
 let isSharedView = false;
 let selections = { name: "", phone: "", email: "", prakruti: {}, vikruti: {} };
 let intakeData = {};
@@ -25,7 +24,7 @@ const t = {
     prakrutiCopy: "Your natural constitution and the relatively stable tendencies you have experienced from childhood to the present.",
     vikrutiCopy: "Changes or imbalances that are showing themselves at the present time (within approximately the past 1 year).",
     meta: "31 questions · approximately 8–10 minutes",
-    profileInfo: "Your information (optional)", name: "Your name", phone: "Phone number", email: "Email", start: "Start the Quiz",
+    profileInfo: "Your information (optional)", name: "Your name", phone: "Phone number", email: "Email", start: "Start the Quiz", continuePrevious: "Continue previous quiz", startOver: "Start over",
     sections: ["A. Physical", "B. Body functions", "C. Psychological"],
     sectionNames: ["Physical Characteristics", "Physical Functional Characteristics", "Psychological Characteristics"],
     part: "Section", questions: "required in this section", overall: "required", oneOptional: "1 optional",
@@ -50,7 +49,7 @@ const t = {
     introCopy: "Bạn sẽ tìm hiểu về thể trạng Dosha tự nhiên của bản thân (Prakruti) và các biểu hiện mất cân bằng hiện tại (Vikruti).",
     prakrutiCopy: "Thể trạng tự nhiên và những khuynh hướng tương đối ổn định của bạn từ thời thơ ấu đến nay.",
     vikrutiCopy: "Những thay đổi hoặc mất cân bằng đang biểu hiện ở thời điểm hiện tại (trong vòng 1 năm gần nhất).",
-    meta: "Bài trắc nghiệm gồm 31 câu · khoảng 8–10 phút", profileInfo: "Thông tin của bạn (không bắt buộc)", name: "Tên của bạn", phone: "Số điện thoại", email: "Email", start: "Bắt đầu bài trắc nghiệm",
+    meta: "Bài trắc nghiệm gồm 31 câu · khoảng 8–10 phút", profileInfo: "Thông tin của bạn (không bắt buộc)", name: "Tên của bạn", phone: "Số điện thoại", email: "Email", start: "Bắt đầu bài trắc nghiệm", continuePrevious: "Tiếp tục bài đang làm", startOver: "Bắt đầu lại",
     sections: ["A. Thể chất", "B. Chức năng cơ thể", "C. Tâm lý"],
     sectionNames: ["Đặc điểm thể chất", "Đặc điểm chức năng cơ thể", "Đặc điểm tâm lý"],
     part: "Phần", questions: "câu bắt buộc trong phần này", overall: "câu bắt buộc", oneOptional: "1 câu không bắt buộc",
@@ -119,7 +118,7 @@ function setLang(lang) {
   if (!isSharedView) localStorage.setItem(STORAGE.language, lang);
   renderChrome();
   if (showingResults) displayDashboard(getCurrentCounts(), isSharedView);
-  else if (started) renderQuiz();
+  else if (questionnaireOpen) renderQuiz();
 }
 function renderChrome() {
   const x = t[currentLang];
@@ -136,7 +135,7 @@ function renderChrome() {
   document.getElementById("user-name").value = selections.name;
   document.getElementById("user-phone").value = selections.phone;
   document.getElementById("user-email").value = selections.email;
-  document.getElementById("start-btn").textContent = x.start;
+  updateIntroActions();
   document.getElementById("btn-view-quiz").textContent = x.viewQuiz;
   document.getElementById("btn-view-form").textContent = x.viewForm;
   ["vi", "en"].forEach(lang => {
@@ -147,6 +146,17 @@ function renderChrome() {
   document.getElementById("btn-view-quiz").setAttribute("aria-pressed", String(currentView === "quiz"));
   document.getElementById("btn-view-form").setAttribute("aria-pressed", String(currentView === "form"));
   updateIntakeLanguage();
+}
+function hasSavedQuizProgress() {
+  return Object.keys(selections.prakruti).length > 0 || Object.keys(selections.vikruti).length > 0;
+}
+function updateIntroActions() {
+  const x = t[currentLang];
+  const hasProgress = hasSavedQuizProgress();
+  document.getElementById("start-btn").textContent = hasProgress ? x.continuePrevious : x.start;
+  const startOver = document.getElementById("start-over-btn");
+  startOver.textContent = x.startOver;
+  startOver.hidden = !hasProgress;
 }
 function updateIntakeLanguage() {
   const root = document.getElementById("form-view");
@@ -166,8 +176,7 @@ function updateIntakeLanguage() {
 }
 function startQuiz() {
   saveName();
-  started = true;
-  localStorage.setItem(STORAGE.started, "true");
+  questionnaireOpen = true;
   document.getElementById("intro").hidden = true;
   document.getElementById("questionnaire").hidden = false;
   renderQuiz();
@@ -524,7 +533,7 @@ function takeOwnQuiz() {
   intakeData = {};
   intakeControls().forEach(control => { control.disabled = false; if (control.type === "checkbox" || control.type === "radio") control.checked = false; else control.value = ""; });
   currentSection = 0;
-  started = false;
+  questionnaireOpen = false;
   history.replaceState({}, document.title, location.pathname);
   renderChrome();
   document.getElementById("shared-banner").hidden = true;
@@ -537,9 +546,9 @@ function resetQuizData() {
   intakeData = {};
   intakeControls().forEach(control => { if (control.type === "checkbox" || control.type === "radio") control.checked = false; else control.value = ""; });
   currentSection = 0;
-  started = false;
+  questionnaireOpen = false;
   isSharedView = false;
-  Object.values(STORAGE).forEach(key => localStorage.removeItem(key));
+  [STORAGE.selections, STORAGE.section, STORAGE.intake, "doshaStarted"].forEach(key => localStorage.removeItem(key));
   history.replaceState({}, document.title, location.pathname);
   renderChrome();
   document.getElementById("results").innerHTML = "";
@@ -565,7 +574,7 @@ async function init() {
       intakeData = profile.intake;
       if (profile.language && t[profile.language] && !params.get("l")) currentLang = profile.language;
       isSharedView = true;
-      started = true;
+      questionnaireOpen = false;
       document.getElementById("questionnaire").hidden = true;
       document.getElementById("intro").hidden = true;
       const banner = document.getElementById("shared-banner");
@@ -583,7 +592,9 @@ async function init() {
       banner.hidden = false;
     }
   }
-  if (started) startQuiz();
+  document.getElementById("intro").hidden = false;
+  document.getElementById("questionnaire").hidden = true;
+  updateIntroActions();
 }
 
 init();

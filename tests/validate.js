@@ -21,7 +21,8 @@ for (const question of questions) {
   }
 }
 
-const appSource = fs.readFileSync("app.js", "utf8").replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,normalizeProfile,createCombinedProfile,setVikrutiControlState,setSelections:value=>{selections=value}};";
+const rawAppSource = fs.readFileSync("app.js", "utf8");
+const appSource = rawAppSource.replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,normalizeProfile,createCombinedProfile,setVikrutiControlState,hasSavedQuizProgress,setSelections:value=>{selections=value}};";
 const appContext = {
   console,
   questions,
@@ -68,4 +69,10 @@ assert.equal(serialized.intake.textarea_2, "diet");
 assert.equal(appContext.testApi.setVikrutiControlState({ querySelector: () => null }, true), false);
 const invalidEqual = appContext.testApi.normalizeProfile({ name: "", prakruti: { face: "vata" }, vikruti: { face: "vata" } });
 assert.equal(invalidEqual.quiz.vikruti.face, undefined);
+assert.doesNotMatch(rawAppSource, /if\s*\(started\)\s*startQuiz/);
+assert.doesNotMatch(rawAppSource, /doshaStarted\s*===\s*["']true/);
+assert.match(indexMarkup, /<section id="intro" class="intro">/);
+assert.match(indexMarkup, /<section id="questionnaire" hidden>/);
+appContext.testApi.setSelections({ name: "Mai", phone: "", email: "", prakruti: { face: "vata" }, vikruti: {} });
+assert.equal(appContext.testApi.hasSavedQuizProgress(), true);
 console.log("Validated sections, bilingual fields, result edge cases, optional non-scoring Menses, and branding contacts.");
