@@ -9,7 +9,3 @@ No build step is required. Serve the repository root with any static web server.
 ```sh
 python3 -m http.server 8000
 ```
-
-## Email delivery
-
-The `sendProfileEmail` Netlify function sends generated PDF profiles through Resend. Configure `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in Netlify; the sender must be a verified Resend sender. The destination is fixed server-side to `twinbeansfarm@gmail.com`.
