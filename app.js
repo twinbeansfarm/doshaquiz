@@ -46,7 +46,7 @@ const t = {
   },
   vi: {
     header: "Bài trắc nghiệm Ayurveda", introTitle: "Khám phá thể trạng Ayurveda của bạn",
-    introCopy: "Bạn sẽ tìm hiểu về thể trạng Dosha tự nhiên của bản thân (Prakruti) và các biểu hiện mất cân bằng hiện tại (Vikruti).",
+    introCopy: "Bạn sẽ tìm hiểu về thể trạng (Dosha) tự nhiên của bản thân (Prakruti) và các biểu hiện mất cân bằng hiện tại (Vikruti).",
     prakrutiCopy: "Thể trạng tự nhiên và những khuynh hướng tương đối ổn định của bạn từ thời thơ ấu đến nay.",
     vikrutiCopy: "Những thay đổi hoặc mất cân bằng đang biểu hiện ở thời điểm hiện tại (trong vòng 1 năm gần nhất).",
     meta: "Bài trắc nghiệm gồm 31 câu · khoảng 8–10 phút", profileInfo: "Thông tin của bạn (không bắt buộc)", name: "Tên của bạn", phone: "Số điện thoại", email: "Email", start: "Bắt đầu bài trắc nghiệm", continuePrevious: "Tiếp tục bài đang làm", startOver: "Bắt đầu lại",
@@ -417,7 +417,7 @@ function buildPrintProfile(counts) {
     const vikrutiText = vikruti ? `${vikruti[0].toUpperCase() + vikruti.slice(1)} — ${question[currentLang][vikruti]}` : "—";
     return `<article class="print-answer"><h3>${number}. ${esc(question[currentLang].trait)}</h3><p><b>Prakruti:</b> ${esc(prakrutiText)}</p><p><b>Vikruti:</b> ${esc(vikrutiText)}</p></article>`;
   }).join("")}</section>`).join("");
-  document.getElementById("print-profile").innerHTML = `<header class="print-profile-head"><div><h1>Twin Beans Farm · Ayurveda</h1><p>${esc(displayName)} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p></div><div>${x.printDate}: ${new Intl.DateTimeFormat(currentLang === "vi" ? "vi-VN" : "en-US").format(new Date())}<br>${x.language}: ${currentLang.toUpperCase()}</div></header><div class="print-summary">${printSummary("prakruti", x.natural, counts.prakruti)}${printSummary("vikruti", x.imbalance, counts.vikruti)}</div><div class="print-answers">${sections}</div><div class="print-contact">Connect your true self with nature. · Hotline / Zalo: 0866 222 340 · twinbeansfarm@gmail.com</div>`;
+  document.getElementById("print-profile").innerHTML = `<header class="print-profile-head"><div><h1><img class="print-brand-logo" src="assets/brand/twin-beans-logo.svg" alt="Twin Beans Farm"> · Ayurveda</h1><p>${esc(displayName)} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p></div><div>${x.printDate}: ${new Intl.DateTimeFormat(currentLang === "vi" ? "vi-VN" : "en-US").format(new Date())}<br>${x.language}: ${currentLang.toUpperCase()}</div></header><div class="print-summary">${printSummary("prakruti", x.natural, counts.prakruti)}${printSummary("vikruti", x.imbalance, counts.vikruti)}</div><div class="print-answers">${sections}</div><div class="print-contact">Connect your true self with nature. · Hotline / Zalo: 0866 222 340 · twinbeansfarm@gmail.com</div>`;
 }
 function printProfile() {
   buildPrintProfile(getCurrentCounts());
@@ -445,7 +445,7 @@ function buildIntakePdfDocument() {
     const label = group?.classList.contains("history-item") ? `${groupLabel || "—"} — ${ownLabel || "—"}` : groupLabel || ownLabel || "—";
     return `<div class="pdf-row"><b>${esc(label)}</b><span>${esc(value)}</span></div>`;
   }).join("");
-  documentNode.innerHTML = `<h1>Twin Beans Farm</h1><h2>${t[currentLang].viewForm}</h2><p>${esc(selections.name || "—")} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p>${rows || "—"}<footer>Connect your true self with nature. · 0866 222 340 · twinbeansfarm@gmail.com</footer>`;
+  documentNode.innerHTML = `<h1><img class="pdf-brand-logo" src="assets/brand/twin-beans-logo.svg" alt="Twin Beans Farm"></h1><h2>${t[currentLang].viewForm}</h2><p>${esc(selections.name || "—")} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p>${rows || "—"}<footer>Connect your true self with nature. · 0866 222 340 · twinbeansfarm@gmail.com</footer>`;
   document.body.appendChild(documentNode);
   return documentNode;
 }
