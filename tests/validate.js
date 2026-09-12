@@ -55,7 +55,7 @@ assert.match(indexMarkup, /Mobile phone/);
 assert.match(indexMarkup, /name="full_name" required/);
 assert.match(indexMarkup, /type="email" class="glass-input" name="email" required/);
 assert.match(indexMarkup, /name="mobile_phone" required/);
-assert.match(indexMarkup, /type="date" class="glass-input" name="date_of_birth" required/);
+assert.match(indexMarkup, /id="intake-date-of-birth" type="date" class="dob-picker" name="date_of_birth" required/);
 assert.match(indexMarkup, /name="last_physical_exam" type="text"/);
 assert.doesNotMatch(indexMarkup, /copy-intake-btn|>Copy link<|>Sao chép liên kết</);
 assert.match(indexMarkup, /onclick="sharePdf\('intake'\)"/);
@@ -101,4 +101,26 @@ assert.match(styles, /body\[data-view="form"\] textarea\{min-height:0;overflow:v
 assert.match(styles, /\.pdf-value\{[^}]*height:auto;overflow:visible;white-space:pre-wrap;overflow-wrap:anywhere/);
 assert.match(styles, /\.action-feedback\{[^}]*text-align:center/);
 assert.match(styles, /\.action-feedback\.error\{[^}]*text-align:center/);
-console.log("Validated sections, bilingual fields, result edge cases, optional non-scoring Menses, and branding contacts.");
+// Mandatory quiz identity and prominent neutral selection guidance.
+assert.match(indexMarkup, /id="user-name"[^>]*required/);
+assert.doesNotMatch(indexMarkup.match(/id="user-phone"[^>]*>/)[0], /required/);
+assert.doesNotMatch(indexMarkup.match(/id="user-email"[^>]*>/)[0], /required/);
+assert.match(rawAppSource, /profileInfo: "Your information", name: "Your name \*"/);
+assert.match(rawAppSource, /profileInfo: "Thông tin của bạn", name: "Tên của bạn \*"/);
+assert.doesNotMatch(rawAppSource, /Your information \(optional\)|Thông tin của bạn \(không bắt buộc\)/);
+assert.match(rawAppSource, /reportValidity\(\)/);
+assert.match(rawAppSource, /scrollIntoView/);
+for (const phrase of ["Khuynh hướng lâu dài", "Bắt buộc", "Cần chọn 1", "Mất cân bằng hiện tại", "Không bắt buộc", "Chỉ chọn khi có biểu hiện", "Long-term tendency", "Mandatory", "Choose 1", "Current imbalance", "Optional", "Select only when present"]) assert.match(rawAppSource, new RegExp(phrase));
+// New semantically named optional intake controls.
+for (const name of ["yoga_practice", "yoga_duration_frequency", "yoga_location_teacher_tradition", "pranayama_practice", "pranayama_practices", "meditation_practice", "meditation_frequency", "meditation_individual_or_group", "meditation_tradition_philosophy", "current_priority_symptom", "symptom_short_description", "symptom_frequency", "symptom_intensity", "symptom_duration", "symptom_actions", "symptom_additional_notes"]) assert.match(indexMarkup, new RegExp(`name="${name}"`));
+assert.equal((indexMarkup.match(/name="symptom_intensity"/g) || []).length, 3);
+assert.match(indexMarkup, /placeholder="DD\/MM\/YYYY"/);
+assert.match(rawAppSource, /formatDob/);
+assert.match(rawAppSource, /date_of_birth" \? formatDob/);
+assert.doesNotMatch(indexMarkup, /raw\.githubusercontent\.com/);
+assert.doesNotMatch(rawAppSource, /raw\.githubusercontent\.com/);
+assert.doesNotMatch(indexMarkup, /twin-beans-logo\.svg/);
+assert.doesNotMatch(rawAppSource, /twin-beans-logo\.svg/);
+assert.equal((rawAppSource.match(/assets\/brand\/TWINBEANS_Revised\.png/g) || []).length, 2);
+assert.doesNotMatch(rawAppSource.match(/function resetQuizData\(\)[\s\S]*?\n}/)[0], /STORAGE\.intake|intakeData = \{\}/);
+console.log("Validated required name, bilingual guidance, intake additions, DD/MM/YYYY DOB, print/PDF flow, and local branding.");
