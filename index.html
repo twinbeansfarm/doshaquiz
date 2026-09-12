@@ -11,7 +11,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="https://twinbeansfarm.com/" aria-label="Twin Beans Farm home"><img src="https://raw.githubusercontent.com/twinbeansfarm/doshaquiz/main/assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></a>
+    <a class="brand" href="https://twinbeansfarm.com/" aria-label="Twin Beans Farm home"><img src="assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></a>
     <span class="header-title" id="header-title">Ayurvedic Dosha Quiz</span>
     <div class="lang-switch" role="group" aria-label="Language">
       <button id="btn-vi" type="button" onclick="setLang('vi')" aria-label="Tiếng Việt">VN</button><button id="btn-en" type="button" onclick="setLang('en')" aria-label="English">EN</button>
@@ -30,7 +30,7 @@
         <p id="intro-copy" class="intro-copy"></p>
         <div class="concepts"><div><h2>Prakruti</h2><p id="prakruti-copy"></p></div><div><h2>Vikruti</h2><p id="vikruti-copy"></p></div></div>
         <p id="quiz-meta" class="quiz-meta"></p>
-        <fieldset class="profile-fields"><legend id="profile-fields-title"></legend><label><span id="name-label"></span><input id="user-name" class="glass-input" type="text" autocomplete="name" maxlength="100"></label><label><span id="phone-label"></span><input id="user-phone" class="glass-input" type="tel" autocomplete="tel" maxlength="40"></label><label><span id="email-label"></span><input id="user-email" class="glass-input" type="email" autocomplete="email" maxlength="120"></label></fieldset>
+        <fieldset class="profile-fields"><legend id="profile-fields-title"></legend><label><span id="name-label"></span><input id="user-name" class="glass-input" type="text" autocomplete="name" maxlength="100" required></label><label><span id="phone-label"></span><input id="user-phone" class="glass-input" type="tel" autocomplete="tel" maxlength="40"></label><label><span id="email-label"></span><input id="user-email" class="glass-input" type="email" autocomplete="email" maxlength="120"></label></fieldset>
         <div class="intro-actions"><button id="start-btn" class="primary-btn" onclick="startQuiz()"></button><button id="start-over-btn" class="secondary-btn" onclick="resetQuizData()" hidden></button></div>
       </section>
       <section id="questionnaire" hidden>
@@ -39,7 +39,7 @@
           <div class="progress-meta"><span id="section-meta"></span><span id="answer-meta"></span></div>
           <div class="progress-track" role="progressbar" aria-label="Long-term tendency progress" aria-valuemin="0" aria-valuemax="30"><span id="progress-bar"></span></div>
         </div>
-        <div class="question-guide"><div><i class="radio-demo"></i><span><b id="long-label"></b><small id="long-help"></small></span></div><div><i class="check-demo"></i><span><b id="current-label"></b><small id="current-help"></small></span></div></div>
+        <div class="question-guide"><div><i class="radio-demo"></i><span><b><span id="long-label"></span> <em id="long-status" class="guide-badge required"></em></b><strong id="long-note" class="guide-note"></strong><small id="long-help"></small></span></div><div><i class="check-demo"></i><span><b><span id="current-label"></span> <em id="current-status" class="guide-badge optional"></em></b><strong id="current-note" class="guide-note"></strong><small id="current-help"></small></span></div></div>
         <div id="quiz-content"></div>
         <div id="validation" class="notice validation" role="alert" hidden></div>
         <div class="section-actions"><button class="secondary-btn" id="previous-btn" onclick="previousSection()"></button><button class="primary-btn" id="continue-btn" onclick="continueSection()"></button></div>
@@ -60,7 +60,7 @@
                     <div class="form-group full-width"><label class="form-label">Address</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label" for="intake-email">Email *</label><input id="intake-email" type="email" class="glass-input" name="email" required></div>
                     <div class="form-group print-half"><label class="form-label" for="intake-mobile-phone">Mobile phone *</label><input id="intake-mobile-phone" type="tel" class="glass-input" name="mobile_phone" required></div>
-                    <div class="form-group print-half"><label class="form-label" for="intake-date-of-birth">Date of birth *</label><input id="intake-date-of-birth" type="date" class="glass-input" name="date_of_birth" required></div>
+                    <div class="form-group print-half"><label class="form-label" for="intake-date-of-birth-display">Date of birth *</label><div class="dob-control"><input id="intake-date-of-birth-display" type="text" class="glass-input" placeholder="DD/MM/YYYY" inputmode="numeric" readonly required data-intake-ignore aria-describedby="dob-format"><input id="intake-date-of-birth" type="date" class="dob-picker" name="date_of_birth" required aria-label="Choose date of birth"></div><small id="dob-format">DD/MM/YYYY</small></div>
                     <div class="form-group print-quarter"><label class="form-label">Marital Status</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Occupation</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-half"><label class="form-label">Referred by (if any)</label><input type="text" class="glass-input"></div>
@@ -81,6 +81,16 @@
                     <label class="form-label">What do you want to achieve in terms of your health and wellness? Please also tell us your current concerns.</label>
                     <textarea class="glass-textarea"></textarea>
                 </div>
+                <section class="intake-subsection current-symptom">
+                  <h3>Current condition / symptom</h3>
+                  <div class="form-group"><label class="form-label">Please identify ONE condition or symptom that you are most concerned about or would most like to improve at present (for example, stress or insomnia).</label><textarea class="glass-textarea new-intake-field" name="current_priority_symptom"></textarea></div>
+                  <div class="form-group"><label class="form-label"><b>1. Short description</b><span>How do you experience this condition/symptom?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_short_description"></textarea></div>
+                  <div class="form-group"><label class="form-label"><b>2. Frequency</b><span>How often does the condition/symptom occur?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_frequency"></textarea></div>
+                  <fieldset class="form-group choice-group"><legend class="form-label"><b>3. Intensity</b><span>How intense is it?</span></legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="mild"> Mild</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="moderate"> Moderate</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="severe"> Severe</label></div></fieldset>
+                  <div class="form-group"><label class="form-label"><b>4. Duration</b><span>For how long have you had this condition/symptom?</span></label><input class="glass-input new-intake-field" type="text" name="symptom_duration"></div>
+                  <div class="form-group"><label class="form-label"><b>5. What have you done to address it?</b><span>Has it been evaluated by a medical professional? Have you tried any home remedies or other approaches?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_actions"></textarea></div>
+                  <div class="form-group"><label class="form-label"><b>Additional notes</b><span>Please provide any other information you would like us to know.</span></label><textarea class="glass-textarea new-intake-field" name="symptom_additional_notes"></textarea></div>
+                </section>
             </div>
 
             <div class="form-block">
@@ -112,6 +122,22 @@
                         <textarea class="glass-textarea"></textarea>
                     </div>
                 </div>
+                <section class="intake-subsection yoga-meditation">
+                  <h3>Yoga &amp; Meditation Experience</h3>
+                  <div class="practice-section"><h4>YOGA</h4>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice Yoga or any other form of physical exercise?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="yoga_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="yoga_practice" value="no"> No</label></div></fieldset>
+                    <div class="form-group"><label class="form-label">If yes, how long have you practiced, and how many sessions per week?</label><textarea class="glass-textarea new-intake-field" name="yoga_duration_frequency"></textarea></div>
+                    <div class="form-group"><label class="form-label">Where do you practice, and with which Yoga teacher or tradition/style?</label><textarea class="glass-textarea new-intake-field" name="yoga_location_teacher_tradition"></textarea></div>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice breathing exercises or Pranayama?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="no"> No</label></div></fieldset>
+                    <div class="form-group"><label class="form-label">If yes, please list the breathing practices you use.</label><textarea class="glass-textarea new-intake-field" name="pranayama_practices"></textarea></div>
+                  </div>
+                  <div class="practice-section"><h4>MEDITATION</h4>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice meditation?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="meditation_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="meditation_practice" value="no"> No</label></div></fieldset>
+                    <div class="form-group"><label class="form-label">If yes, how often do you practice?</label><textarea class="glass-textarea new-intake-field" name="meditation_frequency"></textarea></div>
+                    <div class="form-group"><label class="form-label">Do you practice on your own or with a group?</label><textarea class="glass-textarea new-intake-field" name="meditation_individual_or_group"></textarea></div>
+                    <div class="form-group"><label class="form-label">Which meditation tradition, school, or philosophy do you follow?</label><textarea class="glass-textarea new-intake-field" name="meditation_tradition_philosophy"></textarea></div>
+                  </div>
+                </section>
             </div>
 
             <div class="form-block">
@@ -148,7 +174,7 @@
         </form>
 
           </main>
-  <footer><a class="footer-brand" href="https://twinbeansfarm.com/"><img src="https://raw.githubusercontent.com/twinbeansfarm/doshaquiz/main/assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
+  <footer><a class="footer-brand" href="https://twinbeansfarm.com/"><img src="assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
   <section id="print-profile" aria-hidden="true"></section>
   <script src="quiz-data.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script><script src="app.js"></script>
 </body></html>

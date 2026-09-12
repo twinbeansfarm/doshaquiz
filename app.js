@@ -24,12 +24,12 @@ const t = {
     prakrutiCopy: "Your natural constitution and the relatively stable tendencies you have experienced from childhood to the present.",
     vikrutiCopy: "Changes or imbalances that are showing themselves at the present time (within approximately the past 1 year).",
     meta: "31 questions · approximately 8–10 minutes",
-    profileInfo: "Your information (optional)", name: "Your name", phone: "Phone number", email: "Email", start: "Start the Quiz", continuePrevious: "Continue previous quiz", startOver: "Start over",
+    profileInfo: "Your information", name: "Your name *", phone: "Phone number", email: "Email", start: "Start the Quiz", continuePrevious: "Continue previous quiz", startOver: "Start over",
     sections: ["A. Physical", "B. Body functions", "C. Psychological"],
     sectionNames: ["Physical Characteristics", "Physical Functional Characteristics", "Psychological Characteristics"],
     part: "Section", questions: "required in this section", overall: "required", oneOptional: "1 optional",
-    long: "Long-term tendency", longHelp: "For each characteristic, choose one (01) of the three descriptions that best represents you from childhood to the present.",
-    current: "Current imbalance", currentHelp: "Select only if this characteristic is currently present or has increased within approximately the past 1 year. Only select “Current imbalance” when it is different from your “Long-term tendency”. You do not need to select a current imbalance for every question. You may leave it blank if you are unsure.", optional: "Optional", noMenses: "No menstruation",
+    long: "Long-term tendency", mandatory: "Mandatory", chooseOne: "Choose 1", longHelp: "For each characteristic, choose one (01) of the three descriptions that best represents you from childhood to the present.",
+    current: "Current imbalance", currentOptional: "Optional", selectPresent: "Select only when present", currentHelp: "Select only if this characteristic is currently present or has increased within approximately the past 1 year. Only select “Current imbalance” when it is different from your “Long-term tendency”. You do not need to select a current imbalance for every question. You may leave it blank if you are unsure.", optional: "Optional", noMenses: "No menstruation",
     previous: "Previous", continue: "Continue", results: "View results",
     unanswered: n => `You still have ${n} unanswered long-term tendency question${n === 1 ? "" : "s"}.`,
     jump: "Go to first unanswered", resultsTitle: "Your Ayurvedic profile",
@@ -49,12 +49,12 @@ const t = {
     introCopy: "Bạn sẽ tìm hiểu về thể trạng (Dosha) tự nhiên của bản thân (Prakruti) và các biểu hiện mất cân bằng hiện tại (Vikruti).",
     prakrutiCopy: "Thể trạng tự nhiên và những khuynh hướng tương đối ổn định của bạn từ thời thơ ấu đến nay.",
     vikrutiCopy: "Những thay đổi hoặc mất cân bằng đang biểu hiện ở thời điểm hiện tại (trong vòng 1 năm gần nhất).",
-    meta: "Bài trắc nghiệm gồm 31 câu · khoảng 8–10 phút", profileInfo: "Thông tin của bạn (không bắt buộc)", name: "Tên của bạn", phone: "Số điện thoại", email: "Email", start: "Bắt đầu bài trắc nghiệm", continuePrevious: "Tiếp tục bài đang làm", startOver: "Bắt đầu lại",
+    meta: "Bài trắc nghiệm gồm 31 câu · khoảng 8–10 phút", profileInfo: "Thông tin của bạn", name: "Tên của bạn *", phone: "Số điện thoại", email: "Email", start: "Bắt đầu bài trắc nghiệm", continuePrevious: "Tiếp tục bài đang làm", startOver: "Bắt đầu lại",
     sections: ["A. Thể chất", "B. Chức năng cơ thể", "C. Tâm lý"],
     sectionNames: ["Đặc điểm thể chất", "Đặc điểm chức năng cơ thể", "Đặc điểm tâm lý"],
     part: "Phần", questions: "câu bắt buộc trong phần này", overall: "câu bắt buộc", oneOptional: "1 câu không bắt buộc",
-    long: "Khuynh hướng lâu dài", longHelp: "Với mỗi đặc điểm, chọn một (01) đáp án phù hợp nhất trong ba mô tả bạn từ trước (từ thời thơ ấu) đến nay.",
-    current: "Mất cân bằng hiện tại", currentHelp: "Chỉ đánh dấu nếu đặc điểm này đang xuất hiện hoặc tăng lên hiện nay (trong vòng 1 năm gần nhất). Chỉ đánh dấu khi đặc điểm “Mất cân bằng hiện tại” khác với “Khuynh hướng lâu dài”. Không cần đánh dấu cho từng câu. (Có thể để trống nếu bạn không biết).", optional: "Không bắt buộc", noMenses: "Không có kinh nguyệt",
+    long: "Khuynh hướng lâu dài", mandatory: "Bắt buộc", chooseOne: "Cần chọn 1", longHelp: "Với mỗi đặc điểm, chọn một (01) đáp án phù hợp nhất trong ba mô tả bạn từ trước (từ thời thơ ấu) đến nay.",
+    current: "Mất cân bằng hiện tại", currentOptional: "Không bắt buộc", selectPresent: "Chỉ chọn khi có biểu hiện", currentHelp: "Chỉ đánh dấu nếu đặc điểm này đang xuất hiện hoặc tăng lên hiện nay (trong vòng 1 năm gần nhất). Chỉ đánh dấu khi đặc điểm “Mất cân bằng hiện tại” khác với “Khuynh hướng lâu dài”. Không cần đánh dấu cho từng câu. (Có thể để trống nếu bạn không biết).", optional: "Không bắt buộc", noMenses: "Không có kinh nguyệt",
     previous: "Quay lại", continue: "Tiếp tục", results: "Xem kết quả",
     unanswered: n => `Bạn còn ${n} câu chưa chọn ở phần Khuynh hướng lâu dài.`, jump: "Đến câu đầu tiên",
     resultsTitle: "Hồ sơ thể trạng Ayurveda", namedTitle: name => `Hồ sơ Ayurveda của ${name}`,
@@ -75,6 +75,8 @@ const intakeVi = {
   "Full name":"Họ và tên","Full name *":"Họ và tên *","Email *":"Email *","Mobile phone *":"Điện thoại di động *","Date of birth *":"Ngày tháng năm sinh *","Mobile phone":"Điện thoại di động","Date of birth":"Ngày tháng năm sinh","Referred by (if any)":"Người giới thiệu (nếu có)","Health Information & History Intake":"Hồ sơ thông tin và tiền sử sức khỏe","Personal Details":"Thông tin cá nhân","Client Name":"Họ và tên","Daytime Phone":"Điện thoại liên hệ ban ngày","Address":"Địa chỉ","City, ST, Zip":"Thành phố, tỉnh/bang, mã bưu chính","Email":"Email","Cell":"Điện thoại di động","Age":"Tuổi","DOB":"Ngày sinh","Marital Status":"Tình trạng hôn nhân","Occupation":"Nghề nghiệp","Referred By":"Người giới thiệu","Family Physician":"Bác sĩ gia đình","Objectives":"Mục tiêu","Select the item below that reflects your main objective (one only). Please note that Ayurvedic Consultations do not include medical diagnosis and treatments. If you are concerned about a medical condition, you should see a medical doctor.":"Chọn một mục phản ánh mục tiêu chính của bạn. Tư vấn Ayurveda không bao gồm chẩn đoán hay điều trị y khoa. Nếu lo ngại về một tình trạng bệnh lý, bạn nên gặp bác sĩ.",
   "I want an alternative approach to allopathic medicine for managing illness and disease":"Tôi muốn một phương pháp bổ trợ cho y học hiện đại trong việc quản lý bệnh tật","I want to improve my general health and wellness and reduce my vulnerability to illness and disease":"Tôi muốn cải thiện sức khỏe tổng thể và giảm nguy cơ bệnh tật","I want to improve my lifestyle and dietary practices to improve my health":"Tôi muốn cải thiện lối sống và chế độ ăn để nâng cao sức khỏe","I want to change my habits and behavioral patterns to improve my relationships with others":"Tôi muốn thay đổi thói quen và hành vi để cải thiện các mối quan hệ","I want to manage stress, tension and worry to attain a more stable emotional nature":"Tôi muốn quản lý căng thẳng và lo âu để cảm xúc ổn định hơn","What do you want to achieve in terms of your health and wellness? Please also tell us your current concerns.":"Bạn muốn đạt được điều gì về sức khỏe và sự an lành? Vui lòng chia sẻ những mối quan tâm hiện tại.",
   "Medical History":"Tiền sử sức khỏe","Check appropriate boxes if you or your family members have a history of the following:":"Đánh dấu nếu bạn hoặc người thân có tiền sử các tình trạng sau:","Any Other Diseases Or Problems? (Illnesses, injuries, addictions, weight changes, surgeries, etc.)":"Bệnh hoặc vấn đề nào khác? (Bệnh tật, chấn thương, nghiện, thay đổi cân nặng, phẫu thuật, v.v.)","Current Health & Vitals":"Sức khỏe hiện tại và chỉ số cơ thể","Are you currently under a physician’s care?":"Hiện bạn có đang được bác sĩ theo dõi không?","Last Physical Exam Date":"Ngày khám sức khỏe gần nhất","Height":"Chiều cao","Weight":"Cân nặng","What prescription drugs are you taking (including birth control)?":"Bạn đang dùng thuốc kê đơn nào (bao gồm thuốc tránh thai)?","What non-prescriptions drugs, supplements, or recreational drugs are you taking (including alcohol, tobacco, caffeine)?":"Bạn đang dùng thuốc không kê đơn, thực phẩm bổ sung hoặc chất kích thích nào (bao gồm rượu, thuốc lá, caffeine)?","Diet & Elimination":"Chế độ ăn và bài tiết","Please write down all food you have eaten and drank for the last three days, with timing.":"Vui lòng ghi lại toàn bộ thức ăn, đồ uống và thời điểm sử dụng trong ba ngày gần đây.","When and how often do you eliminate? What does your poop look like (color, shape, quantity, odor)?":"Bạn đi tiêu khi nào và bao lâu một lần? Phân có màu sắc, hình dạng, lượng và mùi như thế nào?","Required Photos":"Ảnh cần cung cấp","Please email the following photos at least 48 hours before your first appointment. You may send the photos individually or provide a Google Drive link. You do not need to send every photo if your consultation is in person; however, providing photos is still encouraged to support a more thorough assessment.":"Vui lòng gửi email các ảnh sau trước buổi hẹn đầu tiên ít nhất 48 giờ. Có thể gửi từng ảnh hoặc một liên kết Google Drive. Bạn không cần gửi tất cả ảnh nếu được tham vấn gặp mặt trực tiếp, tuy nhiên vẫn khuyến khích gửi ảnh để được chẩn đoán tốt hơn.","Full length photo from the front":"Ảnh toàn thân nhìn từ phía trước","Full length profile from the side":"Ảnh toàn thân nhìn nghiêng","Close up of face":"Ảnh cận mặt","Close up of both hands, palms downward":"Ảnh cận hai bàn tay, lòng bàn tay úp xuống","Entire top of the tongue, including the back (ideally photographed immediately after waking, before tongue scraping)":"Toàn bộ mặt trên của lưỡi, gồm phần sau (tốt nhất nên chụp ngay khi thức dậy, trước khi cạo lưỡi)","Close up of eyes looking to the right & left":"Ảnh cận mắt khi nhìn sang phải và trái","Full length childhood photo before the age of 5":"Ảnh toàn thân thời thơ ấu trước 5 tuổi","Print Intake Form":"In Hồ sơ y tế","Me":"Tôi","Fam":"Gia đình",
+  "Current condition / symptom":"Tình trạng / triệu chứng hiện tại","Please identify ONE condition or symptom that you are most concerned about or would most like to improve at present (for example, stress or insomnia).":"Vui lòng cho biết 1 triệu chứng bạn đang rất quan tâm hoặc muốn cải thiện nhất trong hiện tại (ví dụ: stress hoặc mất ngủ).","1. Short description":"1. Miêu tả ngắn gọn","How do you experience this condition/symptom?":"Bạn trải qua tình trạng/triệu chứng này như thế nào?","2. Frequency":"2. Tần suất","How often does the condition/symptom occur?":"Bạn trải nghiệm tình trạng/triệu chứng này thường xuyên như thế nào?","3. Intensity":"3. Mức độ nghiêm trọng","How intense is it?":"Tình trạng/triệu chứng này nghiêm trọng đến mức nào?","Mild":"Nhẹ","Moderate":"Trung bình","Severe":"Nặng","4. Duration":"4. Bao lâu","For how long have you had this condition/symptom?":"Bạn đã có tình trạng/triệu chứng này trong bao lâu rồi?","5. What have you done to address it?":"5. Bạn đã làm gì để giải quyết tình trạng này?","Has it been evaluated by a medical professional? Have you tried any home remedies or other approaches?":"Tình trạng này đã được chuyên gia y tế đánh giá chưa? Bạn đã thử phương pháp trị liệu tại nhà hoặc phương pháp nào khác chưa?","Additional notes":"Ghi chú","Please provide any other information you would like us to know.":"Vui lòng cung cấp thêm thông tin nếu bạn muốn.",
+  "Yoga & Meditation Experience":"Kinh nghiệm Yoga & Thiền định","Do you practice Yoga or any other form of physical exercise?":"Bạn có tập Yoga hay môn thể dục thể thao nào không?","Yes":"Có","No":"Không","If yes, how long have you practiced, and how many sessions per week?":"Nếu có, bạn đã tập bao lâu? Mấy buổi/tuần?","Where do you practice, and with which Yoga teacher or tradition/style?":"Bạn tập ở đâu và với giáo viên/trường phái Yoga nào?","Do you practice breathing exercises or Pranayama?":"Bạn có thực hành các bài tập hít thở hay Pranayama không?","If yes, please list the breathing practices you use.":"Nếu có, xin ghi tên bài tập thở.","MEDITATION":"THIỀN ĐỊNH","Do you practice meditation?":"Bạn có thực hành thiền định không?","If yes, how often do you practice?":"Nếu có, mức độ thường xuyên?","Do you practice on your own or with a group?":"Bạn tự tập hay thực hành theo nhóm?","Which meditation tradition, school, or philosophy do you follow?":"Bạn học thiền theo trường phái nào hoặc theo triết lý sống nào?",
   "Allergies to Food/Drugs/Mold":"Dị ứng thực phẩm/thuốc/nấm mốc","Anemia":"Thiếu máu","Arthritis":"Viêm khớp","Asthma, Pneumonia, TB":"Hen suyễn, viêm phổi, lao","Autoimmune Disease":"Bệnh tự miễn","Blood Pressure (High/Low)":"Huyết áp (cao/thấp)","Cancer / Chemotherapy / Radiation":"Ung thư / hóa trị / xạ trị","Chest Pain/Angina":"Đau ngực/đau thắt ngực","Cholesterol / Triglycerides (High)":"Cholesterol / triglyceride cao","Contact Lenses / Prescription Glasses":"Kính áp tròng / kính thuốc","Dental Treatment Complications":"Biến chứng điều trị nha khoa","Diabetes":"Tiểu đường","Dizziness, Fainting":"Chóng mặt, ngất","Epilepsy, Convulsions, Seizures":"Động kinh, co giật","Feet or Ankles, Swelling":"Sưng bàn chân hoặc mắt cá","Glaucoma, Eye Surgery":"Tăng nhãn áp, phẫu thuật mắt","Headaches/Migraines":"Đau đầu/đau nửa đầu","Heart Attack / Disease / Surgery":"Nhồi máu / bệnh / phẫu thuật tim","Heart Murmur, Palpitations":"Tiếng thổi tim, đánh trống ngực","Hepatitis A / B / Other":"Viêm gan A / B / khác","HIV Exposure":"Phơi nhiễm HIV","IBS, Colitis, Crohn’s, Celiac, etc.":"IBS, viêm đại tràng, Crohn, Celiac, v.v.","Implant, Prosthesis":"Thiết bị cấy ghép, bộ phận giả","Kidney or Bladder Disease / Infection":"Bệnh / nhiễm trùng thận hoặc bàng quang","Mononucleosis, Jaundice, Gallstone":"Tăng bạch cầu đơn nhân, vàng da, sỏi mật","Pain/Ringing in the Ear":"Đau / ù tai","Parasites / Tropical / Chronic Infection":"Ký sinh trùng / nhiễm trùng nhiệt đới / mạn tính","Popping, Clicking, Locking of the Jaw":"Khớp hàm kêu, lục cục hoặc khóa","Prolonged Bleeding When Cut":"Chảy máu kéo dài khi bị thương","Psychiatric Treatment":"Điều trị tâm thần","Rheumatic / High Fever":"Thấp khớp / sốt cao","Shortness of Breath":"Khó thở","Stroke, Cerebro-Vascular Accident":"Đột quỵ, tai biến mạch máu não","Thyroid Disease or Medication":"Bệnh hoặc thuốc tuyến giáp","Ulcers, Intestinal Bleeding":"Loét, xuất huyết đường ruột","Venereal Diseases":"Bệnh lây truyền qua đường tình dục"
 };
 const intakeOriginalText = new WeakMap();
@@ -175,7 +177,16 @@ function updateIntakeLanguage() {
   document.getElementById("share-intake-btn").textContent = t[currentLang].shareProfile;
 }
 function startQuiz() {
+  const nameInput = document.getElementById("user-name");
   saveName();
+  if (!nameInput.value.trim()) {
+    nameInput.setCustomValidity(currentLang === "vi" ? "Vui lòng nhập tên của bạn." : "Please enter your name.");
+    nameInput.reportValidity();
+    nameInput.focus({ preventScroll: true });
+    nameInput.scrollIntoView({ behavior: "smooth", block: "center" });
+    return false;
+  }
+  nameInput.setCustomValidity("");
   questionnaireOpen = true;
   document.getElementById("intro").hidden = true;
   document.getElementById("questionnaire").hidden = false;
@@ -200,11 +211,13 @@ function renderHistory() {
   prepareIntakeControls();
 }
 function intakeControls() {
-  return [...document.querySelectorAll("#form-view input, #form-view textarea, #form-view select")];
+  return [...document.querySelectorAll("#form-view input:not([data-intake-ignore]), #form-view textarea:not([data-intake-ignore]), #form-view select:not([data-intake-ignore])")];
 }
 function prepareIntakeControls() {
-  intakeControls().forEach((control, index) => {
-    const key = `${control.name || "field"}_${index}`;
+  let legacyIndex = 0;
+  intakeControls().forEach(control => {
+    const isNew = control.classList.contains("new-intake-field");
+    const key = isNew ? `${control.name}${control.type === "radio" ? `_${control.value}` : ""}` : `${control.name || "field"}_${legacyIndex++}`;
     control.dataset.intakeKey = key;
     const saved = intakeData[key];
     if (saved !== undefined) {
@@ -219,6 +232,7 @@ function prepareIntakeControls() {
     control.disabled = isSharedView;
   });
   document.getElementById("share-intake-btn").hidden = isSharedView;
+  if (document.getElementById("intake-date-of-birth")) syncDobDisplay();
 }
 function saveIntakeData() {
   if (isSharedView) return;
@@ -268,8 +282,12 @@ function renderQuiz() {
   document.getElementById("questionnaire").hidden = false;
   document.getElementById("results").innerHTML = "";
   document.getElementById("long-label").textContent = x.long;
+  document.getElementById("long-status").textContent = `· ${x.mandatory}`;
+  document.getElementById("long-note").textContent = x.chooseOne;
   document.getElementById("long-help").textContent = x.longHelp;
   document.getElementById("current-label").textContent = x.current;
+  document.getElementById("current-status").textContent = `· ${x.currentOptional}`;
+  document.getElementById("current-note").textContent = x.selectPresent;
   document.getElementById("current-help").textContent = x.currentHelp;
   document.getElementById("section-tabs").innerHTML = x.sections.map((label, index) => `<button type="button" class="${index === currentSection ? "active" : ""}" onclick="goSection(${index})">${label}</button>`).join("");
   document.getElementById("section-meta").textContent = `${x.part} ${String.fromCharCode(65 + currentSection)} / 3 · ${x.sectionNames[currentSection]}`;
@@ -415,7 +433,7 @@ function buildPrintProfile(counts) {
     const vikrutiText = vikruti ? `${vikruti[0].toUpperCase() + vikruti.slice(1)} — ${question[currentLang][vikruti]}` : "—";
     return `<article class="print-answer"><h3>${number}. ${esc(question[currentLang].trait)}</h3><p><b>Prakruti:</b> ${esc(prakrutiText)}</p><p><b>Vikruti:</b> ${esc(vikrutiText)}</p></article>`;
   }).join("")}</section>`).join("");
-  document.getElementById("print-profile").innerHTML = `<header class="print-profile-head"><div><h1><img class="print-brand-logo" src="https://raw.githubusercontent.com/twinbeansfarm/doshaquiz/main/assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"> · Ayurveda</h1><p>${esc(displayName)} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p></div><div>${x.printDate}: ${new Intl.DateTimeFormat(currentLang === "vi" ? "vi-VN" : "en-US").format(new Date())}<br>${x.language}: ${currentLang.toUpperCase()}</div></header><div class="print-summary">${printSummary("prakruti", x.natural, counts.prakruti)}${printSummary("vikruti", x.imbalance, counts.vikruti)}</div><div class="print-answers">${sections}</div><div class="print-contact">Connect your true self with nature. · Hotline / Zalo: 0866 222 340 · twinbeansfarm@gmail.com</div>`;
+  document.getElementById("print-profile").innerHTML = `<header class="print-profile-head"><div><h1><img class="print-brand-logo" src="assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"> · Ayurveda</h1><p>${esc(displayName)} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p></div><div>${x.printDate}: ${new Intl.DateTimeFormat(currentLang === "vi" ? "vi-VN" : "en-US").format(new Date())}<br>${x.language}: ${currentLang.toUpperCase()}</div></header><div class="print-summary">${printSummary("prakruti", x.natural, counts.prakruti)}${printSummary("vikruti", x.imbalance, counts.vikruti)}</div><div class="print-answers">${sections}</div><div class="print-contact">Connect your true self with nature. · Hotline / Zalo: 0866 222 340 · twinbeansfarm@gmail.com</div>`;
 }
 function printProfile() {
   buildPrintProfile(getCurrentCounts());
@@ -442,13 +460,22 @@ function printIntake() {
 function safeFilename(value) {
   return (value || "Client").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9_-]+/gi, "_").replace(/^_+|_+$/g, "") || "Client";
 }
+function formatDob(iso) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+  return match ? `${match[3]}/${match[2]}/${match[1]}` : "";
+}
+function syncDobDisplay() {
+  const picker = document.getElementById("intake-date-of-birth");
+  const display = document.getElementById("intake-date-of-birth-display");
+  display.value = formatDob(picker.value);
+}
 function buildIntakePdfDocument() {
   saveIntakeData();
   const documentNode = document.createElement("section");
   documentNode.className = "pdf-document";
   const rows = intakeControls().map(control => {
     if ((control.type === "checkbox" || control.type === "radio") && !control.checked) return "";
-    const value = control.type === "checkbox" || control.type === "radio" ? "✓" : control.value.trim();
+    const value = control.type === "checkbox" || control.type === "radio" ? "✓" : control.name === "date_of_birth" ? formatDob(control.value) : control.value.trim();
     if (!value) return "";
     const group = control.closest(".form-group, .history-item");
     const ownLabel = control.closest("label")?.textContent.trim();
@@ -457,7 +484,7 @@ function buildIntakePdfDocument() {
     const textareaClass = control.tagName === "TEXTAREA" ? " pdf-textarea-row" : "";
     return `<div class="pdf-row${textareaClass}"><b>${esc(label)}</b><span class="pdf-value">${esc(value)}</span></div>`;
   }).join("");
-  documentNode.innerHTML = `<h1><img class="pdf-brand-logo" src="https://raw.githubusercontent.com/twinbeansfarm/doshaquiz/main/assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></h1><h2>${t[currentLang].viewForm}</h2><p>${esc(selections.name || "—")} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p>${rows || "—"}<footer>Connect your true self with nature. · 0866 222 340 · twinbeansfarm@gmail.com</footer>`;
+  documentNode.innerHTML = `<h1><img class="pdf-brand-logo" src="assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></h1><h2>${t[currentLang].viewForm}</h2><p>${esc(selections.name || "—")} · ${esc(selections.phone || "—")} · ${esc(selections.email || "—")}</p>${rows || "—"}<footer>Connect your true self with nature. · 0866 222 340 · twinbeansfarm@gmail.com</footer>`;
   document.body.appendChild(documentNode);
   return documentNode;
 }
@@ -525,12 +552,10 @@ function takeOwnQuiz() {
 }
 function resetQuizData() {
   selections = { name: "", phone: "", email: "", prakruti: {}, vikruti: {} };
-  intakeData = {};
-  intakeControls().forEach(control => { if (control.type === "checkbox" || control.type === "radio") control.checked = false; else control.value = ""; });
   currentSection = 0;
   questionnaireOpen = false;
   isSharedView = false;
-  [STORAGE.selections, STORAGE.section, STORAGE.intake, "doshaStarted"].forEach(key => localStorage.removeItem(key));
+  [STORAGE.selections, STORAGE.section, "doshaStarted"].forEach(key => localStorage.removeItem(key));
   history.replaceState({}, document.title, location.pathname);
   renderChrome();
   document.getElementById("results").innerHTML = "";
@@ -545,8 +570,17 @@ async function init() {
   const params = new URLSearchParams(location.search);
   if (params.get("l") && t[params.get("l")]) currentLang = params.get("l");
   renderChrome();
-  ["user-name", "user-phone", "user-email"].forEach(id => document.getElementById(id).addEventListener("input", saveName));
+  ["user-name", "user-phone", "user-email"].forEach(id => document.getElementById(id).addEventListener("input", event => {
+    if (id === "user-name" && event.target.value.trim()) event.target.setCustomValidity("");
+    saveName();
+  }));
   prepareIntakeControls();
+  syncDobDisplay();
+  document.getElementById("intake-date-of-birth").addEventListener("change", syncDobDisplay);
+  document.getElementById("intake-date-of-birth-display").addEventListener("click", () => {
+    const picker = document.getElementById("intake-date-of-birth");
+    if (picker.showPicker) picker.showPicker(); else picker.focus();
+  });
   if (params.has("id")) {
     try {
       const response = await fetch(`/.netlify/functions/getQuiz?id=${encodeURIComponent(params.get("id"))}`);
