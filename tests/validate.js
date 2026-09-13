@@ -111,9 +111,16 @@ assert.doesNotMatch(rawAppSource, /Your information \(optional\)|Thông tin củ
 assert.match(rawAppSource, /reportValidity\(\)/);
 assert.match(rawAppSource, /scrollIntoView/);
 for (const phrase of ["Khuynh hướng lâu dài", "Bắt buộc", "Cần chọn 1", "Mất cân bằng hiện tại", "Không bắt buộc", "Chỉ chọn khi có biểu hiện", "Long-term tendency", "Mandatory", "Choose 1", "Current imbalance", "Optional", "Select only when present"]) assert.match(rawAppSource, new RegExp(phrase));
-// New semantically named optional intake controls.
-for (const name of ["yoga_practice", "yoga_duration_frequency", "yoga_location_teacher_tradition", "pranayama_practice", "pranayama_practices", "meditation_practice", "meditation_frequency", "meditation_individual_or_group", "meditation_tradition_philosophy", "current_priority_symptom", "symptom_short_description", "symptom_frequency", "symptom_intensity", "symptom_duration", "symptom_actions", "symptom_additional_notes"]) assert.match(indexMarkup, new RegExp(`name="${name}"`));
+// Semantically named intake controls and the deliberately limited required set.
+for (const name of ["yoga_practice", "yoga_duration_frequency", "yoga_location_teacher_tradition", "pranayama_practice", "pranayama_practices", "meditation_practice", "meditation_frequency", "meditation_individual_or_group", "meditation_tradition_philosophy", "current_health_concern", "symptom_short_description", "symptom_frequency", "symptom_intensity", "symptom_duration", "symptom_actions", "symptom_additional_notes"]) assert.match(indexMarkup, new RegExp(`name="${name}"`));
 assert.equal((indexMarkup.match(/name="symptom_intensity"/g) || []).length, 3);
+for (const name of ["current_health_concern", "symptom_short_description", "symptom_frequency", "symptom_duration", "symptom_actions", "yoga_practice", "pranayama_practice", "meditation_practice"]) assert.match(indexMarkup, new RegExp(`name="${name}"[^>]*required`));
+assert.match(indexMarkup, /name="symptom_intensity" value="mild" required/);
+for (const name of ["yoga_duration_frequency", "pranayama_practices", "meditation_frequency", "meditation_individual_or_group", "meditation_tradition_philosophy", "symptom_additional_notes"]) assert.doesNotMatch(indexMarkup.match(new RegExp(`<[^>]+name="${name}"[^>]*>`))[0], /required/);
+assert.match(rawAppSource, /teacher\.required = Boolean\(practicesYoga\)/);
+assert.ok(indexMarkup.indexOf("Objectives") < indexMarkup.indexOf("Medical History &amp; Current Treatment"));
+assert.ok(indexMarkup.indexOf("Medical History &amp; Current Treatment") < indexMarkup.indexOf("Current Health Concern"));
+assert.ok(indexMarkup.indexOf("Current Health Concern") < indexMarkup.indexOf("Current Health &amp; Vitals"));
 assert.match(indexMarkup, /placeholder="DD\/MM\/YYYY"/);
 assert.match(rawAppSource, /formatDob/);
 assert.match(rawAppSource, /date_of_birth" \? formatDob/);
