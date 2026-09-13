@@ -81,20 +81,10 @@
                     <label class="form-label">What do you want to achieve in terms of your health and wellness? Please also tell us your current concerns.</label>
                     <textarea class="glass-textarea"></textarea>
                 </div>
-                <section class="intake-subsection current-symptom">
-                  <h3>Current condition / symptom</h3>
-                  <div class="form-group"><label class="form-label">Please identify ONE condition or symptom that you are most concerned about or would most like to improve at present (for example, stress or insomnia).</label><textarea class="glass-textarea new-intake-field" name="current_priority_symptom"></textarea></div>
-                  <div class="form-group"><label class="form-label"><b>1. Short description</b><span>How do you experience this condition/symptom?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_short_description"></textarea></div>
-                  <div class="form-group"><label class="form-label"><b>2. Frequency</b><span>How often does the condition/symptom occur?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_frequency"></textarea></div>
-                  <fieldset class="form-group choice-group"><legend class="form-label"><b>3. Intensity</b><span>How intense is it?</span></legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="mild"> Mild</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="moderate"> Moderate</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="severe"> Severe</label></div></fieldset>
-                  <div class="form-group"><label class="form-label"><b>4. Duration</b><span>For how long have you had this condition/symptom?</span></label><input class="glass-input new-intake-field" type="text" name="symptom_duration"></div>
-                  <div class="form-group"><label class="form-label"><b>5. What have you done to address it?</b><span>Has it been evaluated by a medical professional? Have you tried any home remedies or other approaches?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_actions"></textarea></div>
-                  <div class="form-group"><label class="form-label"><b>Additional notes</b><span>Please provide any other information you would like us to know.</span></label><textarea class="glass-textarea new-intake-field" name="symptom_additional_notes"></textarea></div>
-                </section>
             </div>
 
             <div class="form-block">
-                <h2 class="form-title">Medical History</h2>
+                <h2 class="form-title">Medical History &amp; Current Treatment</h2>
                 <p style="font-size: 0.9em; color: #555;" class="print-hide">Check appropriate boxes if you or your family members have a history of the following:</p>
                 <div class="history-grid" id="history-grid">
                     </div>
@@ -102,42 +92,49 @@
                     <label class="form-label">Any Other Diseases Or Problems? (Illnesses, injuries, addictions, weight changes, surgeries, etc.)</label>
                     <textarea class="glass-textarea"></textarea>
                 </div>
+                <div class="form-grid treatment-fields">
+                    <div class="form-group full-width"><label class="checkbox-label" style="font-weight:600;"><input type="checkbox"> Are you currently under a physician’s care?</label></div>
+                    <div class="form-group full-width"><label class="form-label">What prescription drugs are you taking (including birth control)?</label><textarea class="glass-textarea"></textarea></div>
+                    <div class="form-group full-width"><label class="form-label">What non-prescription drugs, supplements, or recreational substances are you taking (including alcohol, tobacco, caffeine)?</label><textarea class="glass-textarea"></textarea></div>
+                </div>
             </div>
 
             <div class="form-block">
-                <h2 class="form-title">Current Health & Vitals</h2>
+                <h2 class="form-title">Current Health Concern</h2>
+                <p class="section-explanation">From the health concerns you listed above, please choose ONE condition or symptom that you are most concerned about or would most like to focus on during this consultation.</p>
+                <div class="form-group"><label class="form-label">Please identify ONE condition or symptom that you are most concerned about or would most like to improve at present (for example, stress or insomnia). <b aria-hidden="true">*</b></label><textarea class="glass-textarea new-intake-field" name="current_health_concern" required></textarea></div>
+                <div class="form-group"><label class="form-label"><b>1. Short description *</b><span>How do you experience this condition/symptom?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_short_description" required></textarea></div>
+                <div class="form-group"><label class="form-label"><b>2. Frequency *</b><span>How often does the condition/symptom occur?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_frequency" required></textarea></div>
+                <fieldset class="form-group choice-group"><legend class="form-label"><b>3. Intensity *</b><span>How intense is it?</span></legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="mild" required> Mild</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="moderate"> Moderate</label><label><input class="new-intake-field" type="radio" name="symptom_intensity" value="severe"> Severe</label></div></fieldset>
+                <div class="form-group"><label class="form-label"><b>4. Duration *</b><span>For how long have you had this condition/symptom?</span></label><input class="glass-input new-intake-field" type="text" name="symptom_duration" required></div>
+                <div class="form-group"><label class="form-label"><b>5. What have you done to address it? *</b><span>Has this condition been evaluated by a medical professional? Are you currently receiving any medical treatment for it? Have you tried any home remedies or other approaches?</span></label><textarea class="glass-textarea new-intake-field" name="symptom_actions" required></textarea></div>
+                <div class="form-group"><label class="form-label"><b>Additional notes</b><span>Please provide any other information you would like us to know.</span></label><textarea class="glass-textarea new-intake-field" name="symptom_additional_notes"></textarea></div>
+            </div>
+
+            <div class="form-block">
+                <h2 class="form-title">Current Health &amp; Vitals</h2>
                 <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label class="checkbox-label" style="font-weight:600;"><input type="checkbox"> Are you currently under a physician’s care?</label>
-                    </div>
                     <div class="form-group print-half"><label class="form-label" for="last-physical-exam">Last Physical Exam Date</label><input id="last-physical-exam" name="last_physical_exam" type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Height</label><input type="text" class="glass-input"></div>
                     <div class="form-group print-quarter"><label class="form-label">Weight</label><input type="text" class="glass-input"></div>
-                    <div class="form-group full-width">
-                        <label class="form-label">What prescription drugs are you taking (including birth control)?</label>
-                        <textarea class="glass-textarea"></textarea>
-                    </div>
-                    <div class="form-group full-width">
-                        <label class="form-label">What non-prescriptions drugs, supplements, or recreational drugs are you taking (including alcohol, tobacco, caffeine)?</label>
-                        <textarea class="glass-textarea"></textarea>
-                    </div>
                 </div>
-                <section class="intake-subsection yoga-meditation">
-                  <h3>Yoga &amp; Meditation Experience</h3>
+            </div>
+
+            <div class="form-block yoga-meditation">
+                  <h2 class="form-title">Yoga &amp; Meditation Experience</h2>
                   <div class="practice-section"><h4>YOGA</h4>
-                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice Yoga or any other form of physical exercise?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="yoga_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="yoga_practice" value="no"> No</label></div></fieldset>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice Yoga or any other form of physical exercise? *</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="yoga_practice" value="yes" required> Yes</label><label><input class="new-intake-field" type="radio" name="yoga_practice" value="no"> No</label></div></fieldset>
                     <div class="form-group"><label class="form-label">If yes, how long have you practiced, and how many sessions per week?</label><textarea class="glass-textarea new-intake-field" name="yoga_duration_frequency"></textarea></div>
-                    <div class="form-group"><label class="form-label">Where do you practice, and with which Yoga teacher or tradition/style?</label><textarea class="glass-textarea new-intake-field" name="yoga_location_teacher_tradition"></textarea></div>
-                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice breathing exercises or Pranayama?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="no"> No</label></div></fieldset>
+                    <div class="form-group"><label class="form-label" for="yoga-location-teacher">Where do you practice, and with which Yoga teacher or tradition/style?<span class="conditional-required" hidden> *</span></label><textarea id="yoga-location-teacher" class="glass-textarea new-intake-field" name="yoga_location_teacher_tradition"></textarea></div>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice breathing exercises or Pranayama? *</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="yes" required> Yes</label><label><input class="new-intake-field" type="radio" name="pranayama_practice" value="no"> No</label></div></fieldset>
                     <div class="form-group"><label class="form-label">If yes, please list the breathing practices you use.</label><textarea class="glass-textarea new-intake-field" name="pranayama_practices"></textarea></div>
                   </div>
                   <div class="practice-section"><h4>MEDITATION</h4>
-                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice meditation?</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="meditation_practice" value="yes"> Yes</label><label><input class="new-intake-field" type="radio" name="meditation_practice" value="no"> No</label></div></fieldset>
+                    <fieldset class="form-group choice-group"><legend class="form-label">Do you practice meditation? *</legend><div class="inline-choices"><label><input class="new-intake-field" type="radio" name="meditation_practice" value="yes" required> Yes</label><label><input class="new-intake-field" type="radio" name="meditation_practice" value="no"> No</label></div></fieldset>
                     <div class="form-group"><label class="form-label">If yes, how often do you practice?</label><textarea class="glass-textarea new-intake-field" name="meditation_frequency"></textarea></div>
                     <div class="form-group"><label class="form-label">Do you practice on your own or with a group?</label><textarea class="glass-textarea new-intake-field" name="meditation_individual_or_group"></textarea></div>
                     <div class="form-group"><label class="form-label">Which meditation tradition, school, or philosophy do you follow?</label><textarea class="glass-textarea new-intake-field" name="meditation_tradition_philosophy"></textarea></div>
                   </div>
-                </section>
             </div>
 
             <div class="form-block">
