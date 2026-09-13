@@ -89,7 +89,7 @@ assert.match(fs.readFileSync("styles.css", "utf8"), /grid-template-columns:minma
 assert.match(rawAppSource, /Bạn sẽ tìm hiểu về thể trạng \(Dosha\) tự nhiên của bản thân \(Prakruti\) và các biểu hiện mất cân bằng hiện tại \(Vikruti\)\./);
 assert.doesNotMatch(`${indexMarkup}\n${rawAppSource}`, /Gửi Twin Beans Farm|Send to Twin Beans Farm|send-quiz-btn|send-intake-btn|sendProfileEmail/);
 assert.match(indexMarkup, /Please email the following photos at least 48 hours before your first appointment\. You may send the photos individually or provide a Google Drive link\. You do not need to send every photo if your consultation is in person; however, providing photos is still encouraged to support a more thorough assessment\./);
-assert.match(rawAppSource, /Vui lòng gửi email các ảnh sau trước buổi hẹn đầu tiên ít nhất 48 giờ\. Email: Twinbeansfarm@gmail\.com\. Có thể gửi từng ảnh hoặc một liên kết Google Drive\. Bạn không cần gửi tất cả ảnh nếu được tham vấn gặp mặt trực tiếp, tuy nhiên vẫn khuyến khích gửi ảnh để được chẩn đoán tốt hơn\./);
+assert.match(rawAppSource, /Vui lòng gửi email các ảnh sau trước buổi hẹn đầu tiên ít nhất 48 giờ\. Có thể gửi từng ảnh hoặc một liên kết Google Drive\. Bạn không cần gửi tất cả ảnh nếu được tham vấn gặp mặt trực tiếp, tuy nhiên vẫn khuyến khích gửi ảnh để được chẩn đoán tốt hơn\./);
 assert.match(rawAppSource, /Toàn bộ mặt trên của lưỡi, gồm phần sau \(tốt nhất nên chụp ngay khi thức dậy, trước khi cạo lưỡi\)/);
 assert.doesNotMatch(`${indexMarkup}\n${rawAppSource}`, /ít nhất mỗi năm một lần sau đó|at least once a year afterwards/);
 assert.match(rawAppSource, /textarea\.style\.height = "auto";[\s\S]*textarea\.scrollHeight/);
