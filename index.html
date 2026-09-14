@@ -45,12 +45,12 @@
         <div class="section-actions"><button class="secondary-btn" id="previous-btn" onclick="previousSection()"></button><button class="primary-btn" id="continue-btn" onclick="continueSection()"></button></div>
       </section>
       <section id="results" aria-live="polite"></section>
+      <div id="quiz-consultation-note" class="notice consultation-note"><span>For a consultation, please email your quiz results, Health Intake, and photos to Twin Beans Farm:</span> <a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div>
     </section>
 <form id="form-view" style="display: none;" onsubmit="return false;">
             <div class="form-block">
                 <h2 class="form-title">Health Information & History Intake</h2>
-                <p style="font-size: 0.9em; line-height: 1.6; color: #555; margin-bottom: 20px;" class="print-hide">
-                </p>
+                <p id="required-legend" style="font-size: 0.9em; line-height: 1.6; color: #555; margin-bottom: 20px;" class="print-hide">* Required information</p>
             </div>
 
             <div class="form-block">
@@ -166,12 +166,13 @@
                     </ul>
                 </p>
             </div>
-            
-            <div id="intake-feedback" class="action-feedback" role="status" aria-live="polite"></div><div class="intake-print-actions print-hide"><button type="button" id="share-intake-btn" class="primary-btn" onclick="sharePdf('intake')">Share profile</button><button type="button" id="print-intake-btn" class="action-btn" onclick="printIntake()">Print Intake Form</button></div>
+
+            <div id="intake-consultation-note" class="notice consultation-note"><span>For a consultation, please email your quiz results, Health Intake, and photos to Twin Beans Farm:</span> <a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div>
+            <div id="intake-feedback" class="action-feedback" role="status" aria-live="polite"></div><div class="intake-print-actions print-hide"><button type="button" id="share-intake-btn" class="primary-btn" onclick="if (validateIntakeForExport()) sharePdf('intake')">Share profile</button><button type="button" id="print-intake-btn" class="action-btn" onclick="if (validateIntakeForExport()) printIntake()">Print Intake Form</button></div>
         </form>
 
           </main>
   <footer><a class="footer-brand" href="https://twinbeansfarm.com/"><img src="assets/brand/TWINBEANS_Revised.png" alt="Twin Beans Farm"></a><p>Connect your true self with nature.</p><div class="footer-contact"><a href="tel:+84866222340">Hotline / Zalo: 0866 222 340</a><a href="mailto:twinbeansfarm@gmail.com">twinbeansfarm@gmail.com</a></div><span>© Twin Beans Farm</span></footer>
   <section id="print-profile" aria-hidden="true"></section>
-  <script src="quiz-data.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script><script src="app.js"></script>
+  <script src="quiz-data.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script><script src="app.js"></script><script src="intake-enhancements.js"></script>
 </body></html>
