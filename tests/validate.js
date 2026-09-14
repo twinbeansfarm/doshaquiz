@@ -22,6 +22,7 @@ for (const question of questions) {
 }
 
 const rawAppSource = fs.readFileSync("app.js", "utf8");
+const enhancementSource = fs.readFileSync("intake-enhancements.js", "utf8");
 const appSource = rawAppSource.replace(/\ninit\(\);\s*$/, "") + "\nglobalThis.testApi={rankedGroups,getCurrentCounts,resultPanel,questionHTML,normalizeProfile,createCombinedProfile,setVikrutiControlState,hasSavedQuizProgress,setSelections:value=>{selections=value}};";
 const appContext = {
   console,
@@ -58,7 +59,9 @@ assert.match(indexMarkup, /name="mobile_phone" required/);
 assert.match(indexMarkup, /id="intake-date-of-birth" type="date" class="dob-picker" name="date_of_birth" required/);
 assert.match(indexMarkup, /name="last_physical_exam" type="text"/);
 assert.doesNotMatch(indexMarkup, /copy-intake-btn|>Copy link<|>Sao chép liên kết</);
-assert.match(indexMarkup, /onclick="sharePdf\('intake'\)"/);
+assert.match(indexMarkup, /onclick="if \(validateIntakeForExport\(\)\) sharePdf\('intake'\)"/);
+assert.match(indexMarkup, /onclick="if \(validateIntakeForExport\(\)\) printIntake\(\)"/);
+assert.match(indexMarkup, /<script src="intake-enhancements\.js"><\/script>/);
 assert.match(fs.readFileSync("styles.css", "utf8"), /UVN Chuky/);
 const legacy = appContext.testApi.normalizeProfile({ name: "Old", prakruti: { face: "vata" }, vikruti: {} });
 assert.equal(legacy.version, 1);
@@ -87,7 +90,7 @@ assert.match(rawAppSource, /id="share-btn"/);
 assert.match(rawAppSource, /class="history-header"/);
 assert.match(fs.readFileSync("styles.css", "utf8"), /grid-template-columns:minmax\(0,1fr\) 54px 76px/);
 assert.match(rawAppSource, /Bạn sẽ tìm hiểu về thể trạng \(Dosha\) tự nhiên của bản thân \(Prakruti\) và các biểu hiện mất cân bằng hiện tại \(Vikruti\)\./);
-assert.doesNotMatch(`${indexMarkup}\n${rawAppSource}`, /Gửi Twin Beans Farm|Send to Twin Beans Farm|send-quiz-btn|send-intake-btn|sendProfileEmail/);
+assert.doesNotMatch(`${indexMarkup}\n${rawAppSource}\n${enhancementSource}`, /Gửi Twin Beans Farm|Send to Twin Beans Farm|send-quiz-btn|send-intake-btn|sendProfileEmail/);
 assert.match(indexMarkup, /Please email the following photos at least 48 hours before your first appointment\. You may send the photos individually or provide a Google Drive link\. You do not need to send every photo if your consultation is in person; however, providing photos is still encouraged to support a more thorough assessment\./);
 assert.match(rawAppSource, /Vui lòng gửi email các ảnh sau trước buổi hẹn đầu tiên ít nhất 48 giờ\. Có thể gửi từng ảnh hoặc một liên kết Google Drive\. Bạn không cần gửi tất cả ảnh nếu được tham vấn gặp mặt trực tiếp, tuy nhiên vẫn khuyến khích gửi ảnh để được chẩn đoán tốt hơn\./);
 assert.match(rawAppSource, /Toàn bộ mặt trên của lưỡi, gồm phần sau \(tốt nhất nên chụp ngay khi thức dậy, trước khi cạo lưỡi\)/);
@@ -130,4 +133,23 @@ assert.doesNotMatch(indexMarkup, /twin-beans-logo\.svg/);
 assert.doesNotMatch(rawAppSource, /twin-beans-logo\.svg/);
 assert.equal((rawAppSource.match(/assets\/brand\/TWINBEANS_Revised\.png/g) || []).length, 2);
 assert.doesNotMatch(rawAppSource.match(/function resetQuizData\(\)[\s\S]*?\n}/)[0], /STORAGE\.intake|intakeData = \{\}/);
-console.log("Validated required name, bilingual guidance, intake additions, DD/MM/YYYY DOB, print/PDF flow, and local branding.");
+
+// Consultation guidance, required legend, and validation before Intake Share/Print.
+assert.match(indexMarkup, /id="required-legend"[^>]*>\* Required information<\/p>/);
+assert.match(indexMarkup, /id="quiz-consultation-note"/);
+assert.match(indexMarkup, /id="intake-consultation-note"/);
+assert.match(indexMarkup, /For a consultation, please email your quiz results, Health Intake, and photos to Twin Beans Farm:/);
+assert.match(enhancementSource, /Để được tư vấn, vui lòng gửi email kết quả trắc nghiệm, hồ sơ y tế và hình ảnh về email Twin Beans:/);
+assert.match(enhancementSource, /\* Thông tin bắt buộc/);
+assert.match(enhancementSource, /Vui lòng hoàn thành các thông tin bắt buộc \(\*\) trước khi chia sẻ hoặc in Hồ sơ y tế\./);
+assert.match(enhancementSource, /Please complete the required fields \(\*\) before sharing or printing your Health Intake\./);
+assert.match(enhancementSource, /function validateIntakeForExport\(\)/);
+assert.match(enhancementSource, /updateYogaTeacherRequirement\(\)/);
+assert.match(enhancementSource, /querySelectorAll\("input\[required\], textarea\[required\], select\[required\]"\)/);
+assert.match(enhancementSource, /control\.checkValidity\(\)/);
+assert.match(enhancementSource, /form\.checkValidity\(\)/);
+assert.match(enhancementSource, /reportValidity/);
+assert.match(enhancementSource, /scrollIntoView/);
+assert.match(enhancementSource, /showActionFeedback\(copy\.validationMessage, true, "intake"\)/);
+
+console.log("Validated required name, bilingual guidance, intake additions, required export validation, consultation notes, DD/MM/YYYY DOB, print/PDF flow, and local branding.");
