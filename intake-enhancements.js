@@ -14,18 +14,17 @@ const intakeEnhancementCopy = {
 };
 
 function intakeEnhancementLanguage() {
-  return document.documentElement.lang === "vi" ? "vi" : "en";
+  return document.documentElement.lang === "en" ? "en" : "vi";
 }
 
-function updateIntakeEnhancementLanguage() {
-  const copy = intakeEnhancementCopy[intakeEnhancementLanguage()];
-  const legend = document.getElementById("required-legend");
-  if (legend) legend.textContent = copy.requiredLegend;
+function updateIntakeEnhancementLanguage(lang = intakeEnhancementLanguage()) {
+  const copy = intakeEnhancementCopy[lang === "en" ? "en" : "vi"];
 
   ["quiz-consultation-note", "intake-consultation-note"].forEach(id => {
     const note = document.getElementById(id);
     const text = note?.querySelector("span");
     if (text) text.textContent = copy.consultationNote;
+    if (note) note.style.textAlign = "center";
   });
 }
 
@@ -59,8 +58,17 @@ function validateIntakeForExport() {
   return false;
 }
 
-updateIntakeEnhancementLanguage();
+// The form already marks required fields with *, so no separate legend is needed.
+document.getElementById("required-legend")?.remove();
 
-if (typeof MutationObserver !== "undefined") {
-  new MutationObserver(updateIntakeEnhancementLanguage).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+// Default the consultation guidance to Vietnamese. It changes to English only
+// when the user explicitly switches to English, and back to Vietnamese on VN.
+updateIntakeEnhancementLanguage("vi");
+
+if (typeof setLang === "function") {
+  const originalSetLang = setLang;
+  setLang = function(lang) {
+    originalSetLang(lang);
+    updateIntakeEnhancementLanguage(lang);
+  };
 }
