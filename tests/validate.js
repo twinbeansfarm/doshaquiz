@@ -114,7 +114,7 @@ assert.doesNotMatch(rawAppSource, /Your information \(optional\)|Thông tin củ
 assert.match(rawAppSource, /reportValidity\(\)/);
 assert.match(rawAppSource, /scrollIntoView/);
 for (const phrase of ["Khuynh hướng lâu dài", "Bắt buộc", "Cần chọn 1", "Mất cân bằng hiện tại", "Không bắt buộc", "Chỉ chọn khi có biểu hiện", "Long-term tendency", "Mandatory", "Choose 1", "Current imbalance", "Optional", "Select only when present"]) assert.match(rawAppSource, new RegExp(phrase));
-// Semantically named intake controls and the deliberately limited required set.
+// Semantically named intake controls and the deliberately limited required set already present on main.
 for (const name of ["yoga_practice", "yoga_duration_frequency", "yoga_location_teacher_tradition", "pranayama_practice", "pranayama_practices", "meditation_practice", "meditation_frequency", "meditation_individual_or_group", "meditation_tradition_philosophy", "current_health_concern", "symptom_short_description", "symptom_frequency", "symptom_intensity", "symptom_duration", "symptom_actions", "symptom_additional_notes"]) assert.match(indexMarkup, new RegExp(`name="${name}"`));
 assert.equal((indexMarkup.match(/name="symptom_intensity"/g) || []).length, 3);
 for (const name of ["current_health_concern", "symptom_short_description", "symptom_frequency", "symptom_duration", "symptom_actions", "yoga_practice", "pranayama_practice", "meditation_practice"]) assert.match(indexMarkup, new RegExp(`name="${name}"[^>]*required`));
@@ -134,14 +134,13 @@ assert.doesNotMatch(rawAppSource, /twin-beans-logo\.svg/);
 assert.equal((rawAppSource.match(/assets\/brand\/TWINBEANS_Revised\.png/g) || []).length, 2);
 assert.doesNotMatch(rawAppSource.match(/function resetQuizData\(\)[\s\S]*?\n}/)[0], /STORAGE\.intake|intakeData = \{\}/);
 
-// Consultation guidance, required legend, and validation before Intake Share/Print.
+// Consultation guidance and validation before Intake Share/Print.
 assert.match(indexMarkup, /id="required-legend"[^>]*>\* Required information<\/p>/);
 assert.match(indexMarkup, /id="quiz-consultation-note"/);
 assert.match(indexMarkup, /id="intake-consultation-note"/);
 assert.match(indexMarkup, /For a consultation, please email your quiz results, Health Intake, and photos to Twin Beans Farm:/);
-assert.match(enhancementSource, /Để được tư vấn, vui lòng gửi email kết quả trắc nghiệm, hồ sơ y tế và hình ảnh về email Twin Beans:/);
-assert.match(enhancementSource, /\* Thông tin bắt buộc/);
-assert.match(enhancementSource, /Vui lòng hoàn thành các thông tin bắt buộc \(\*\) trước khi chia sẻ hoặc in Hồ sơ y tế\./);
+assert.match(enhancementSource, /Để được tư vấn, vui lòng gửi email kết quả trắc nghiệm, hồ sơ sức khoẻ và hình ảnh về email Twin Beans:/);
+assert.match(enhancementSource, /Vui lòng hoàn thành các thông tin bắt buộc \(\*\) trước khi chia sẻ hoặc in Hồ sơ sức khoẻ\./);
 assert.match(enhancementSource, /Please complete the required fields \(\*\) before sharing or printing your Health Intake\./);
 assert.match(enhancementSource, /function validateIntakeForExport\(\)/);
 assert.match(enhancementSource, /updateYogaTeacherRequirement\(\)/);
@@ -152,4 +151,20 @@ assert.match(enhancementSource, /reportValidity/);
 assert.match(enhancementSource, /scrollIntoView/);
 assert.match(enhancementSource, /showActionFeedback\(copy\.validationMessage, true, "intake"\)/);
 
-console.log("Validated required name, bilingual guidance, intake additions, required export validation, consultation notes, DD/MM/YYYY DOB, print/PDF flow, and local branding.");
+// PR16 refinements are applied after app.js so they preserve the latest main behavior.
+assert.match(enhancementSource, /t\.vi\.viewForm = "Hồ sơ sức khoẻ"/);
+assert.match(enhancementSource, /t\.vi\.printIntake = "In Hồ sơ sức khoẻ"/);
+assert.match(enhancementSource, /Người đồng hành không phải nhân viên y tế, mà các giáo viên được đào tạo để hướng dẫn lối sống cân bằng và phương pháp cải thiện sức khoẻ thuận tự nhiên phù hợp với thể trạng cá nhân\./);
+assert.match(enhancementSource, /radio\.classList\.add\("new-intake-field"\)/);
+assert.match(enhancementSource, /radio\.required = index === 0/);
+assert.match(enhancementSource, /goal\.name = "health_wellness_goal"/);
+assert.match(enhancementSource, /goal\.required = true/);
+assert.match(enhancementSource, /diet\.name = "diet_three_day_log"/);
+assert.match(enhancementSource, /diet\.required = true/);
+assert.match(enhancementSource, /elimination\.name = "elimination_pattern"/);
+assert.match(enhancementSource, /elimination\.required = true/);
+assert.match(enhancementSource, /function enhanceObjectivePdfLabel\(\)/);
+assert.match(enhancementSource, /Objective \*"/);
+assert.doesNotMatch(enhancementSource, /Email: Twinbeansfarm@gmail\.com/);
+
+console.log("Validated resolved PR16: latest main preserved, Health Intake terminology/copy refined, required Objectives and Diet/Elimination enforced, PDF objective label included, and consultation validation retained.");
