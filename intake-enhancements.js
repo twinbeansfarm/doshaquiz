@@ -148,6 +148,25 @@ function applyHealthIntakeRefinements() {
   if (typeof saveIntakeData === "function" && !isSharedView) saveIntakeData();
 }
 
+function enhanceObjectivePdfLabel() {
+  if (typeof buildIntakePdfDocument !== "function") return;
+  const originalBuildIntakePdfDocument = buildIntakePdfDocument;
+  buildIntakePdfDocument = function() {
+    const selected = document.querySelector('#form-view input[name="objective"]:checked');
+    const group = selected?.closest(".form-group");
+    const groupLabel = group?.querySelector(".objective-required-label");
+    const optionLabel = selected?.closest("label")?.textContent.trim();
+    const originalLabel = groupLabel?.textContent;
+
+    if (groupLabel && optionLabel) groupLabel.textContent = `${originalLabel} — ${optionLabel}`;
+    try {
+      return originalBuildIntakePdfDocument();
+    } finally {
+      if (groupLabel && originalLabel) groupLabel.textContent = originalLabel;
+    }
+  };
+}
+
 function validateIntakeForExport() {
   const form = document.getElementById("form-view");
   if (!form) return true;
@@ -180,6 +199,7 @@ function validateIntakeForExport() {
 
 applyHealthIntakeCopy();
 applyHealthIntakeRefinements();
+enhanceObjectivePdfLabel();
 
 // Default the consultation guidance to Vietnamese. It changes to English only
 // when the user explicitly switches to English, and back to Vietnamese on VN.
